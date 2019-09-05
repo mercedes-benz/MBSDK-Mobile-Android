@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: MIT -->
-# Mercedes-Benz Mobile SDK - AppFamily module for Android
+# Mercedes-Benz Mobile SDK - Mobile module for Android
 
 ## Intended Usage
 
