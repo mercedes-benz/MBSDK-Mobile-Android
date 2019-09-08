@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.profile.locale.BaseUserLocaleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+            android:id="@+id/tv_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/location_header"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider_top"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mb_divider_height"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_headline" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_selected_country"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:onClick="@{() -> model.onCountryClicked()}"
+            android:text="@{model.selectedCountry}"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/divider_top"
+            tools:text="Deutschland" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:onClick="@{() -> model.onCountryClicked()}"
+            android:src="@drawable/ic_expand_more"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_selected_country"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_selected_country"
+            app:rotateOpposite="@{model.countriesExpanded}" />
+
+        <View
+            android:id="@+id/divider_country"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mb_divider_height"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_country" />
+
+        <com.daimler.mbmobilesdk.views.ModelNumberPicker
+            android:id="@+id/picker_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:theme="@style/SdkTheme.Picker"
+            android:visibility="@{model.countriesExpanded}"
+            app:initialSelection="@{model.selectedCountry}"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/divider_country"
+            app:liveItems="@{model.countries}"
+            app:onChangeListener="@{(newVal) -> model.onLocaleChanged(newVal)}"
+            tools:visibility="gone" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_selected_language"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:onClick="@{() -> model.onLanguageClicked()}"
+            android:text="@{model.selectedLanguage}"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/picker_country"
+            tools:text="Deutsch" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:onClick="@{() -> model.onLanguageClicked()}"
+            android:src="@drawable/ic_expand_more"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_selected_language"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_selected_language"
+            app:rotateOpposite="@{model.languagesExpanded}" />
+
+        <View
+            android:id="@+id/divider_language"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mb_divider_height"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_language" />
+
+        <com.daimler.mbmobilesdk.views.ModelNumberPicker
+            android:id="@+id/picker_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:theme="@style/SdkTheme.Picker"
+            android:visibility="@{model.languagesExpanded}"
+            app:initialSelection="@{model.selectedLanguage}"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintTop_toBottomOf="@+id/divider_language"
+            app:liveItems="@{model.languages}"
+            app:onChangeListener="@{(newVal) -> model.onLocaleChanged(newVal)}"
+            tools:visibility="gone" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:onClick="@{() -> model.onNextClicked()}"
+            android:text="@string/general_continue"
+            app:layout_constraintBottom_toTopOf="@id/btn_legal"
+            app:layout_constraintStart_toStartOf="@id/g_start" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryTextButton
+            android:id="@+id/btn_legal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:visibility="@{model.legalVisible}"
+            android:onClick="@{() -> model.onLegalClicked()}"
+            android:text="@string/login_legal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/g_start" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

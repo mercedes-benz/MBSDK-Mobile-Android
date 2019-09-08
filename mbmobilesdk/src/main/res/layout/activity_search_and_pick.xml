@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.picker.SearchAndPickViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/mb_black"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+                    android:id="@+id/registration_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.title}"
+                    android:textColor="@color/mb_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Select XYZ" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_small"
+                    android:onClick="@{() -> model.onCancelClicked()}"
+                    android:src="@drawable/ic_close"
+                    android:tint="@color/mb_white"
+                    app:colorFilter="@{@color/mb_white}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/mb_margin_small"
+                    android:onClick="@{() -> model.onApplyClicked()}"
+                    android:src="@drawable/ic_checkmark"
+                    android:tint="@color/mb_white"
+                    android:visibility="@{model.applyVisible}"
+                    app:colorFilter="@{@color/mb_white}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mb_black"
+            android:paddingTop="@dimen/mb_margin_small"
+            android:paddingBottom="@dimen/mb_margin_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <ImageView
+                android:id="@+id/image_left"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:src="@drawable/ic_search"
+                android:tint="@color/mb_white"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/edit_search" />
+
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_small"
+                android:layout_marginEnd="@dimen/mb_margin_small"
+                android:afterTextChanged="@{(editable) -> model.onTextChanged(editable)}"
+                android:background="@drawable/bg_input_search"
+                android:hint="@string/general_search"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:padding="@dimen/mb_margin_small"
+                android:textColor="@color/mb_black"
+                android:textColorHint="@color/mb_grey2"
+                app:layout_constraintEnd_toStartOf="@id/text_cancel"
+                app:layout_constraintStart_toEndOf="@+id/image_left"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                android:id="@+id/text_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:onClick="@{()->model.onClearSearch()}"
+                android:text="@string/general_cancel"
+                android:textColor="@color/mb_accent_primary"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/edit_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            app:decorator="@{model.decorator}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_frame"
+            app:liveItems="@{model.items}"
+            app:scrollPosition="@{model.scrollPosition}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

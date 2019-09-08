@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.daimler.mbmobilesdk.notificationcenter.presentation.messageoverview.MessageOverviewViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/mb_unit_x4"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/mb_unit_x4" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBHeadline6TextView
+                android:id="@+id/tv_messages"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_unit_x6"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/notification_center_messages_title"/>
+
+            <View
+                android:id="@+id/v_title_divider"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/mb_divider_height"
+                android:background="@color/mb_grey3"
+                android:layout_marginTop="@dimen/mb_unit_x6"
+                app:layout_constraintTop_toBottomOf="@id/tv_messages"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/sr_messages"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
+                android:layout_marginTop="@dimen/mb_unit_x6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_title_divider"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_messages"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                style="@style/MBLoadingSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_title_divider"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

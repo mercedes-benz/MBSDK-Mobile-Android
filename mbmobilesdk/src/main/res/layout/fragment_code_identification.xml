@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleassignment.AssignmentCodeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/assign_code_vin_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginRight="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/assign_code_vin_description"
+            android:textColor="@color/mb_text_color_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_vin"
+            style="@style/MBTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:layout_marginRight="@dimen/mb_margin_default"
+            app:layout_constraintTop_toBottomOf="@id/tv_text">
+
+            <com.daimler.mbuikit.widgets.edittexts.MBEditText
+                style="@style/MBEditTextStyle"
+                android:layout_width="match_parent"
+                android:hint="@string/assign_code_vin_placeholder"
+                android:inputType="textCapCharacters"
+                android:text="@={model.vin}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/btn_generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginRight="@dimen/mb_margin_default"
+            android:enabled="@{!safeUnbox(model.progressVisible)}"
+            android:onClick="@{() -> model.onGenerateCodeClicked()}"
+            android:text="@string/assign_code_vin_button"
+            app:layout_constraintTop_toBottomOf="@id/edit_vin" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.progressVisible)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_generate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

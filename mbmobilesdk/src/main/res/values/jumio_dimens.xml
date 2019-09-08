@@ -1,0 +1,16 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="jumio_bottom_card_height">202dp</dimen>
+    <dimen name="jumio_success_img_size">92dp</dimen>
+    <dimen name="jumio_item_container_height">65dp</dimen>
+    <dimen name="jumio_item_height">64dp</dimen>
+    <dimen name="jumio_item_img_size">56dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="jumio_next_img_size">24dp</dimen>
+    <dimen name="jumio_scan_view_bottom_margin">176dp</dimen>
+s
+</resources>

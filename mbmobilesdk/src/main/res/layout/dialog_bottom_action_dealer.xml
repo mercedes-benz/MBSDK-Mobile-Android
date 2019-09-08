@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.dialogs.DealerActionDialogViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.dealerNameAvailable}"
+            android:text="@{model.dealerName}"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:textColor="@color/mb_grey2"
+            android:gravity="center"
+            tools:text="Dealer name"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="@color/mb_divider_color"
+            android:visibility="@{model.dealerNameAvailable}"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline6TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.phone != null}"
+            android:onClick="@{() -> model.onCallClick()}"
+            android:text="@string/dealer_search_call"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:textColor="@color/mb_accent_primary" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline6TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.navigateAvailable}"
+            android:onClick="@{() -> model.onNavigateClick()}"
+            android:text="@string/dealer_search_navigate"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:textColor="@color/mb_accent_primary" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline6TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.saveAvailable}"
+            android:onClick="@{() -> model.onSaveClick()}"
+            android:text="@string/profile_save"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:textColor="@color/mb_accent_primary"/>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="@color/mb_divider_color"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline6TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.city != null || model.street != null}"
+            android:onClick="@{() -> model.onCancelClick()}"
+            android:text="@string/general_cancel"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:textColor="@color/mb_status_error" />
+
+    </LinearLayout>
+
+
+</layout>

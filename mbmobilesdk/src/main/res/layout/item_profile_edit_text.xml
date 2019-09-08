@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.profile.items.ProfileEditTextItem" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/mb_margin_small"
+        android:paddingBottom="@dimen/mb_margin_small">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_text"
+            style="@style/MBTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:hint="@{model.hint}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.daimler.mbuikit.widgets.edittexts.MBEditText
+                style="@style/MBEditTextStyle"
+                android:layout_width="match_parent"
+                android:afterTextChanged="@{(editable) -> model.onTextChanged(editable)}"
+                android:clickable="@{!model.editable}"
+                android:onClick="@{() -> model.onItemClicked()}"
+                android:singleLine="true"
+                android:text="@={model.content}"
+                android:inputType="@{model.inputType}"
+                app:allowInput="@{model.editable}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:nextOrDone="@{model.hasNext}"
+                app:onFocusChangeListener="@{(v, hasFocus) -> model.onFocusChanged(hasFocus)}"
+                tools:hint="Hint"
+                tools:ignore="Deprecated" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </FrameLayout>
+
+</layout>

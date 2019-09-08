@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+def REDIRECT_SCHEME = 'accciamsample'
+
+android {
+
+    compileSdkVersion compiled_sdk_version
+    defaultConfig {
+        applicationId "com.daimler.mbmobilesdk.example"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = ['appAuthRedirectScheme': "$REDIRECT_SCHEME"]
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        app {
+            keyAlias 'refapp_debug'
+            keyPassword 'AnxFS@Q$G8+w-S'
+            storeFile file('keystore_debug.jks')
+            storePassword '9T(+k<-Azr:Q=43>'
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.app
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.app
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        iaa {
+            initWith debug
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    kapt "androidx.databinding:databinding-compiler:$gradle_plugin_version"
+    implementation "androidx.multidex:multidex:$multidex_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_lib_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test:rules:$test_rules_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+    androidTestImplementation "com.sun.mail:android-mail:$android_mail_version"
+
+    implementation project(path: ':mbmobilesdk')
+}
+
+apply plugin: 'com.google.gms.google-services'

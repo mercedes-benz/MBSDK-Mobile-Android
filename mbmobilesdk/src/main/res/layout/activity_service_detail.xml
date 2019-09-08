@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.serviceactivation.ServiceDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/mb_black"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+                android:id="@+id/tv_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/mb_margin_large"
+                android:layout_marginEnd="@dimen/mb_margin_large"
+                android:singleLine="true"
+                android:text="@{model.toolbarTitle}"
+                android:textColor="@color/mb_white"
+                tools:text="Ferndiagnose" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@+id/btn_activate"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:gravity="center"
+                    android:text="@{model.description}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="Current State"
+                    app:emphasis="medium"
+                    app:layout_constraintStart_toStartOf="@+id/tv_description"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_state_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.state}"
+                    app:layout_constraintStart_toStartOf="@+id/tv_state"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_state"
+                    tools:text="STATE_INACTIVE" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_allowed_actions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="Allowed Actions"
+                    app:layout_constraintStart_toStartOf="@+id/tv_state"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_state_content" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_allowed_actions_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.allowedActions}"
+                    app:layout_constraintStart_toStartOf="@+id/tv_allowed_actions"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_allowed_actions"
+                    tools:text="SET_DESIRED_ACTIVE" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_rights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="Rights"
+                    app:layout_constraintStart_toStartOf="@+id/tv_allowed_actions"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_allowed_actions_content" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_rights_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.rights}"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rights"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rights"
+                    tools:text="ACTIVATE" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_prerequisites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="Prerequisites"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rights"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rights_content" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_prerequisites_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.prerequisites}"
+                    app:layout_constraintStart_toStartOf="@+id/tv_prerequisites"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_prerequisites"
+                    tools:text="license - SET_DESIRED_ACTIVE" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_preconditions_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:gravity="center"
+                    android:text="@string/service_detail_preconditions_hint"
+                    android:visibility="@{safeUnbox(model.preconditionsVisible)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_prerequisites_content" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                    android:id="@+id/btn_preconditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_default"
+                    android:onClick="@{() -> model.onShowPreconditionsClicked()}"
+                    android:text="@string/service_detail_button_preconditions"
+                    android:visibility="@{safeUnbox(model.preconditionsVisible)}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_preconditions_hint" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_not_changeable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:gravity="center"
+                    android:text="@string/service_detail_not_changeable"
+                    android:visibility="@{safeUnbox(model.noRightsVisible)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_prerequisites_content" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/btn_activate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:onClick="@{() -> model.onToggleServiceClicked()}"
+            android:text="@{model.activationButtonText}"
+            android:visibility="@{safeUnbox(model.activationButtonVisible)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Service aktivieren" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.progressVisible)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

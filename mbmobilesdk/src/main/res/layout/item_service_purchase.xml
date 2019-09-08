@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.serviceactivation.ServicePurchaseItem" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_service_height"
+        android:clickable="@{model.selectable}"
+        android:onClick="@{() -> model.onItemClicked()}">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_name,tv_hint" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{model.iconRes}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@{model.name}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_hint"
+            app:layout_constraintEnd_toStartOf="@+id/tv_purchase"
+            app:layout_constraintStart_toEndOf="@+id/iv_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Fernabfrage Fahrzeugstatus Test Test" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:text="@{model.hint}"
+            android:textColor="@color/mb_grey2"
+            android:visibility="@{model.hint != null}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_purchase"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="Activation is processing..." />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_purchase"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:onClick="@{() -> model.onPurchaseClicked()}"
+            android:paddingStart="@dimen/mb_margin_small"
+            android:paddingEnd="@dimen/mb_margin_small"
+            android:text="@string/activate_services_purchase_button"
+            android:textColor="@color/mb_accent_primary"
+            android:textSize="@dimen/font_size_service"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mb_divider_height"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config>
+
+        <domain includeSubdomains="true">auth-stable.westeurope.cloudapp.azure.com</domain>
+        <domain includeSubdomains="true">auth-ci.westeurope.cloudapp.azure.com</domain>
+        <domain includeSubdomains="true">auth-int.westeurope.cloudapp.azure.com</domain>
+
+        <domain includeSubdomains="true">auth-stable.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">auth-ci.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">auth-int.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">auth-mock.risingstars-mock.daimler.com</domain>
+
+        <domain includeSubdomains="true">bff-stable.westeurope.cloudapp.azure.com</domain>
+        <domain includeSubdomains="true">bff-ci.westeurope.cloudapp.azure.com</domain>
+        <domain includeSubdomains="true">bff-int.westeurope.cloudapp.azure.com</domain>
+        <domain includeSubdomains="true">bff-stable.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">bff-ci.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">bff-int.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">bff-mock.risingstars-mock.daimler.com</domain>
+
+        <domain includeSubdomains="true">keycloak.risingstars-int.daimler.com</domain>
+        <domain includeSubdomains="true">keycloak.risingstars-mock.daimler.com</domain>
+
+        <domain includeSubdomains="true">jumio.com</domain>
+
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+            <certificates src="@raw/ca_stable" />
+            <certificates src="@raw/ca_ci" />
+            <certificates src="@raw/ca_int" />
+            <certificates src="@raw/rs_daimler_int" />
+            <certificates src="@raw/rs_daimler_mock" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

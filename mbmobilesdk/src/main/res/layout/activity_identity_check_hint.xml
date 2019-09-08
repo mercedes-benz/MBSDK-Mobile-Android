@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.daimler.mbmobilesdk.jumio.identitycheckhint.IdentityCheckHintViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/start">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/identity_check_img_size"
+                    android:layout_height="@dimen/identity_check_img_size"
+                    android:layout_marginBottom="@dimen/mb_unit_x12"
+                    android:layout_marginTop="@dimen/mb_margin_large"
+                    android:src="@drawable/img_profile_placeholder" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_small"
+                    android:gravity="center"
+                    android:text="@string/verification_home_headline"/>
+
+                <TextView
+                    style="@style/MBTextAppearance.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_small"
+                    android:gravity="center"
+                    android:text="@string/verification_home_description"
+                    android:textColor="@color/jumio_black_alpha62" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/later"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_small"
+            android:onClick="@{() -> viewModel.onStartClicked()}"
+            android:text="@string/verification_info_start_button" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+            android:id="@+id/later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:onClick="@{() -> viewModel.onLaterClicked()}"
+            android:text="@string/verification_home_later_button" />
+
+        <!-- TODO: take care after registration flow implementation -->
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryTextButton
+            android:id="@+id/btn_legal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/login_legal"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</layout>

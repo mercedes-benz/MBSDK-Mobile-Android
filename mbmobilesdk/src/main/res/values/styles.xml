@@ -1,0 +1,72 @@
+<resources>
+
+    <style name="SdkTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="DialogActivitySdkTheme" parent="Theme.AppCompat.Light.Dialog" />
+
+    <style name="SdkTheme.Picker">
+        <item name="android:textColor">@color/mb_black</item>
+        <item name="colorControlNormal">@color/mb_grey3</item>
+        <item name="android:textSize">@dimen/mb_font_size_headline_6</item>
+        <item name="android:fontFamily">@font/mb_font_serif</item>
+    </style>
+
+    <style name="MBTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabRippleColor">@color/mb_accent_primary</item>
+        <item name="tabIndicatorColor">@color/mb_accent_primary</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabPaddingStart">6dp</item>
+        <item name="tabPaddingEnd">6dp</item>
+        <item name="android:background">@drawable/bg_underline_grey</item>
+        <item name="tabTextAppearance">@style/MBTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/mb_accent_primary</item>
+    </style>
+    <!-- for text -->
+    <style name="MBTabTextAppearance" parent="MBTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/mb_black</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="Jumio" parent="SdkTheme">
+        <item name="bam_scanOverlay">@color/jumio_white_alpha72</item>
+        <item name="bam_scanBackground">@color/jumio_black_alpha50</item>
+
+        <item name="netverify_scanOverlay">@color/jumio_white_alpha40</item>
+        <item name="netverify_scanBackground">@color/jumio_black_alpha50</item>
+
+        <item name="netverify_scanOverlayTemplateValid">@color/jumio_primary_dark</item>
+        <item name="netverify_scanOverlayTemplateInvalid">@color/jumio_grey200</item>
+        <item name="netverify_scanOverlayDetectedLine">@color/jumio_primary</item>
+        <item name="netverify_scanOverlayDetectedLineStroke">@color/jumio_white</item>
+
+        <item name="face_scanOverlayBackground">@color/mb_black</item>
+        <item name="face_scanOverlayFeedbackText">@color/jumio_white</item>
+        <item name="face_scanOverlayFeedbackBackground">@color/jumio_primary</item>
+        <item name="face_scanOverlayProgress">@color/jumio_primary</item>
+        <item name="face_scanOverlayOval">@color/jumio_white</item>
+    </style>
+
+    <style name="SettingElementText">
+        <item name="android:textColor">@color/mb_black</item>
+        <item name="android:textSize">@dimen/mb_font_size_body_1</item>
+        <item name="android:fontFamily">@font/daimler_cs_regular</item>
+    </style>
+
+    <style name="SettingDivider">
+        <item name="android:background">@color/mb_divider_color</item>
+        <item name="android:height">@dimen/divider_height</item>
+    </style>
+
+    <style name="SettingRowElement">
+        <item name="android:height">@dimen/settings_element_height</item>
+        <item name="android:paddingTop">@dimen/mb_margin_default</item>
+        <item name="android:paddingBottom">@dimen/mb_margin_small</item>
+    </style>
+
+    <style name="MBDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/mb_accent_primary</item>
+        <item name="android:colorAccent">@color/mb_accent_primary</item>
+    </style>
+
+</resources>

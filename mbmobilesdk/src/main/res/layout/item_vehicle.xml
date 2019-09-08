@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.send2car.VehicleItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onClick()}"
+        android:paddingStart="@dimen/mb_margin_default"
+        android:paddingTop="@dimen/mb_margin_small"
+        android:paddingEnd="@dimen/mb_margin_default"
+        android:paddingBottom="@dimen/mb_margin_small">
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline6TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.text}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

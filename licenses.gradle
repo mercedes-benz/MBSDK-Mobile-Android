@@ -1,0 +1,127 @@
+import groovy.json.JsonSlurper
+import groovy.json.JsonBuilder
+
+apply plugin: 'com.jaredsburrows.license'
+
+//def EXCLUDE = ["com.android", "org.jetbrains.kotlin", "android.arch.lifecycle", "com.google.firebase"]
+def EXCLUDE = []
+
+licenseReport.generateJsonReport = true
+
+task generateSdkLicenses {
+    doLast {
+        licenseReleaseReport.execute()
+        Set<String> dependencies = new HashSet<String>()
+        configurations.releaseRuntimeClasspath.resolvedConfiguration.getFirstLevelModuleDependencies().each {
+            getDependencies(it, dependencies, EXCLUDE)
+        }
+        File jsonFile = file("$buildDir/reports/licenses/licenseReleaseReport.json")
+        Object json = new JsonSlurper().parseText(jsonFile.text)
+        List<Lib> licenses = new ArrayList<Lib>()
+        json.each { if (dependencies.contains(it.dependency)) licenses.add(mapLib(it)) }
+        licenses.sort { f, s -> f.name <=> s.name }
+        writeLicensesToAssets(licenses)
+    }
+}
+
+task downloadLicenses {
+    doLast {
+        def inJson = "sdk_licenses/appfamily_sdk_licenses.json"
+        Set<String> assetsDirs = project.android.sourceSets.main.assets.srcDirs
+        assetsDirs.each { assetDir ->
+            File json = new File(assetDir, inJson)
+            println("File = ${json.absolutePath}")
+            if (json.exists()) {
+                Object licenses = new JsonSlurper().parseText(json.text)
+                licenses.licenses.each {
+                    if (it.fileUrl != null && !it.fileUrl.isEmpty()) {
+                        println("Loading ${it.fileUrl}")
+                        File destination = new File(assetDir, "sdk_licenses/${it.file}")
+                        new URL(it.fileUrl).withInputStream { stream ->
+                            destination.withOutputStream { outStream -> outStream << stream }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+private void writeLicensesToAssets(List<Lib> licenses) {
+    println("Writing licenses to assets.")
+    def outJson = "generated_sdk_licenses.json"
+    Set<String> assetsDirs = project.android.sourceSets.main.assets.srcDirs
+    assetsDirs.each {
+        File outputFile = new File(it, outJson)
+        outputFile.parentFile.mkdirs()
+        outputFile.createNewFile()
+        outputFile.withOutputStream {
+            PrintStream stream = new PrintStream(it)
+            stream.println(buildJson(licenses))
+            stream.println()
+            stream.close()
+        }
+    }
+}
+
+private static String buildJson(List<Lib> libs) {
+    JsonBuilder builder = new JsonBuilder()
+    builder(licenses: libs)
+    return builder.toPrettyString()
+}
+
+private static Lib mapLib(Object object) {
+    return new Lib(
+            name: object.project,
+            version: object.version,
+            fileUrl: null,
+            file: null,
+            licenses: mapLicenses(object.licenses),
+            dependency: object.dependency
+    )
+}
+
+private static List<License> mapLicenses(List<Object> objects) {
+    if (objects == null || objects.isEmpty()) return new ArrayList<License>()
+    List<License> result = new ArrayList<License>(objects.size)
+    objects.each {
+        License license = new License(
+                license: it.license,
+                url: it.license_url
+        )
+        result.add(license)
+    }
+    return result
+}
+
+private void getDependencies(ResolvedDependency resolvedDependency, Set<String> dependencies, List<String> exclude) {
+    String name = resolvedDependency.name
+    if (name.contains("com.daimler.mm:")) {
+        resolvedDependency.getChildren().each {
+            getDependencies(it, dependencies, exclude)
+        }
+    } else {
+        boolean excluded = false
+        exclude.each {
+            if (name.contains(it)) {
+                excluded = true
+                return
+            }
+        }
+        if (!excluded) dependencies.add(name)
+    }
+}
+
+class Lib {
+    String name
+    String version
+    String fileUrl
+    String file
+    List<License> licenses
+    String dependency
+}
+
+class License {
+    String license
+    String url
+}

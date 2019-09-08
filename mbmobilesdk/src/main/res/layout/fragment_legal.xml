@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.legal.LegalViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/mb_margin_small"
+            android:fillViewport="true"
+            android:visibility="@{safeUnbox(model.contentVisible)}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_imprint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:visibility="@{!safeUnbox(model.imprintSpinnerVisible)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@{model.imprint}"
+                    tools:text="@string/lorem" />
+
+                <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+                    android:id="@+id/progress_imprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="@{safeUnbox(model.imprintSpinnerVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_app_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onAppDescriptionClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_imprint"
+                    app:text="@{model.appDescriptionTitle}"
+                    tools:text="@string/legal_app_description" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_terms_of_use"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onTermsOfUseClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_app_description"
+                    app:text="@{model.termsOfUseTitle}"
+                    tools:text="@string/legal_terms_of_use" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_soe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onSoeClicked()}"
+                    android:visibility="@{safeUnbox(model.soeVisibile)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_terms_of_use"
+                    app:text="@string/legal_mercedes_me_tou" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_data_protection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onDataProtectionClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_soe"
+                    app:text="@{model.dataProtectionTitle}"
+                    tools:text="@string/legal_data_protection" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_foss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onLicensesClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_data_protection"
+                    app:text="@string/legal_foss" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_foreign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onForeignClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_foss"
+                    app:text="@{model.foreignTitle}"
+                    tools:text="@string/legal_foreign" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_legal_hints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onLegalHintsClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_foreign"
+                    app:text="@{model.legalHintsTitle}"
+                    tools:text="@string/legal_legal_hints" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_natcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onNatconClicked()}"
+                    android:visibility="@{safeUnbox(model.natconVisible)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_legal_hints"
+                    app:text="@string/natcon_title" />
+
+                <com.daimler.mbmobilesdk.views.MBTextAndArrowView
+                    android:id="@+id/tv_support"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.onSupportClicked()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_natcon"
+                    app:text="@string/legal_app_support" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.progressVisible)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

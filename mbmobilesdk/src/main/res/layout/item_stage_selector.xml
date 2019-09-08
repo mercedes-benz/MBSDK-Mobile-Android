@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.stageselector.StageItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="@{model.selectable}"
+        android:onClick="@{() -> model.onItemClicked()}">
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_small"
+            android:text="@{model.title}"
+            app:layout_constraintStart_toEndOf="@+id/selected_indicator"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="PROD" />
+
+        <View
+            android:id="@+id/selected_indicator"
+            android:layout_width="@dimen/mb_unit_x2"
+            android:layout_height="0dp"
+            android:background="@color/mb_accent_primary"
+            android:visibility="@{model.selected}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

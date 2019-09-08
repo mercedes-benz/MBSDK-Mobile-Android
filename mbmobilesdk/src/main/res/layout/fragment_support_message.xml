@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.daimler.mbmobilesdk.support.fragments.SendMessageFragment">
+
+    <data>
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.support.viewmodels.SupportMessageViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ris_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/mb_margin_default">
+
+            <!-- Enter Message and Details Layout -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mbcl_send_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="@{safeUnbox(model.messageEnterVisible)}"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/mbtv_message_description"
+                    style="@style/MBTextAppearance.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_unit_x3"
+                    android:layout_marginBottom="@dimen/mb_unit_x3"
+                    android:text="@string/rssm_message_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/til_question"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_question"
+                    style="@style/MBTextInputLayoutStyle"
+                    android:background="@drawable/mb_edittext_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbtv_message_description"
+                    app:layout_constraintBottom_toTopOf="@id/mbcv_optional_details_container">
+
+                    <com.daimler.mbuikit.widgets.edittexts.MBEditText
+                        android:id="@+id/mbet_support_edit_question"
+                        style="@style/MBEditTextStyle"
+                        android:background="#00FFFFFF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/rssm_message_textfield"
+                        android:inputType="textMultiLine"
+                        android:gravity="start|top"
+                        android:maxLength="300"
+                        android:text="@{model.message}"
+                        android:onTextChanged="@{model.onQuestionChanged}"
+                        android:minLines="2" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- the optional info -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mbcv_optional_details_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_unit_x3"
+                    android:layout_marginBottom="@dimen/mb_unit_x3"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_question"
+                    app:layout_constraintBottom_toTopOf="@id/mbtv_required_hint">
+
+                    <TextView
+                        android:id="@+id/mbtv_optional_title"
+                        style="@style/MBTextAppearance.Overline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:text="@string/rssm_message_details_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/mb_divider_optional_title"/>
+
+                    <View
+                        android:id="@+id/mb_divider_optional_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:visibility="@{safeUnbox(model.vehicleSelectionVisible)}"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbtv_optional_title"
+                        app:layout_constraintBottom_toTopOf="@id/mbcl_support_car_select"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/mbcl_support_car_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/mb_unit_x1"
+                        android:paddingBottom="@dimen/mb_unit_x1"
+                        android:visibility="@{safeUnbox(model.vehicleSelectionVisible)}"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mb_divider_optional_title"
+                        app:layout_constraintBottom_toTopOf="@id/mb_divider_car_selection">
+
+                        <ImageView
+                            android:id="@+id/mbiv_icon_car"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_car_front"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/mbtv_selected_car_question"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rssm_message_details_car"
+                            android:layout_marginStart="@dimen/mb_unit_x5"
+                            style="@style/MBTextAppearance.Overline"
+                            android:textColor="@color/mb_grey2"
+                            android:textAllCaps="false"
+                            app:layout_constraintStart_toEndOf="@id/mbiv_icon_car"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/mbtv_selected_car"
+                            style="@style/MBTextAppearance.Body1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@{model.selectedCar}"
+                            android:layout_marginStart="@dimen/mb_unit_x5"
+                            app:layout_constraintStart_toEndOf="@id/mbiv_icon_car"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mbtv_selected_car_question"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/mb_divider_car_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbcl_support_car_select"
+                        app:layout_constraintBottom_toTopOf="@id/mbcl_support_time_select"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/mbcl_support_time_select"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/mb_unit_x1"
+                        android:paddingBottom="@dimen/mb_unit_x1"
+                        android:onClick="@{() -> model.onDateTimeClick()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mb_divider_car_selection"
+                        app:layout_constraintBottom_toTopOf="@id/mb_divider_time_selection">
+
+                        <ImageView
+                            android:id="@+id/mbiv_icon_calendar"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_calendar"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/mbtv_selected_time_question"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rssm_message_details_timestamp"
+                            android:layout_marginStart="@dimen/mb_unit_x5"
+                            style="@style/MBTextAppearance.Overline"
+                            android:textColor="@color/mb_grey2"
+                            android:textAllCaps="false"
+                            app:layout_constraintStart_toEndOf="@id/mbiv_icon_calendar"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/mbtv_selected_time"
+                            style="@style/MBTextAppearance.Body1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@={model.dateTime}"
+                            android:layout_marginStart="@dimen/mb_unit_x5"
+                            app:layout_constraintStart_toEndOf="@id/mbiv_icon_calendar"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mbtv_selected_time_question"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/mb_divider_time_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbcl_support_time_select"
+                        app:layout_constraintBottom_toTopOf="@id/mbcl_image_selection_layout"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/mbcl_image_selection_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mb_divider_time_selection"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <ImageView
+                            android:id="@+id/mbiv_icon_image"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/ic_image_attachment"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/mbtv_add_images"/>
+
+                        <TextView
+                            android:id="@+id/mbtv_add_images"
+                            style="@style/MBTextAppearance.Overline"
+                            android:textAllCaps="false"
+                            android:textColor="@color/mb_grey2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rssm_message_details_image"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/mbiv_icon_image"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/mbrv_image_selection"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/mb_unit_x3"
+                            android:layout_marginBottom="@dimen/mb_unit_x3"
+                            app:layout_constraintTop_toBottomOf="@id/mbtv_add_images"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/mbtv_add_images"
+                            app:liveItems="@{model.imageList}" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/mbtv_required_hint"
+                    style="@style/MBTextAppearance.Body2"
+                    android:textColor="@color/mb_grey2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rssm_message_form_label_required"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mbcv_optional_details_container"
+                    app:layout_constraintBottom_toTopOf="@+id/mbbtn_what_data_message"
+                    app:layout_constraintHorizontal_bias="0"/>
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryTextButton
+                    android:id="@+id/mbbtn_what_data_message"
+                    style="@style/MBTextAppearance.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="start"
+                    android:drawableStart="@drawable/ic_info_outline_small"
+                    android:drawablePadding="@dimen/mb_unit_x3"
+                    android:text="@string/rssm_call_data_hint"
+                    android:textColor="#00AAFF"
+                    android:onClick="@{() -> model.onDataDialogClick()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbtv_required_hint"
+                    app:layout_constraintBottom_toTopOf="@id/mbbtn_ask_question"
+                    app:layout_constraintHorizontal_bias="0"/>
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                    android:id="@+id/mbbtn_ask_question"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_unit_x3"
+                    android:layout_marginBottom="@dimen/mb_unit_x3"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:drawableStart="@drawable/ic_messaging"
+                    android:drawableTint="@color/mb_white"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="40dp"
+                    android:enabled="@{safeUnbox(model.sendMessageEnabled)}"
+                    android:text="@string/rssm_message_button_ask_question"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> model.onAskButtonClick()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbbtn_what_data_message"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- the container containing the question, now in non-editable form (cannot use
+            EditText for that), and - depending on the user progress - the progressbar, the bot
+            answer, the message that question has been sent to CAC and various buttons to let the
+            user decide how to continue -->
+
+            <!-- Overview Message Layout -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mbcl_chat_overview_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/mb_unit_x3"
+                android:background="@drawable/mb_edittext_background"
+                android:visibility="@{safeUnbox(model.messageDetailsVisible)}"
+                android:orientation="vertical"
+                tools:visibility="gone">
+
+                <TextView
+                    android:id="@+id/mbtv_title_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rssm_message_chat_your_message_label_from"
+                    android:layout_marginBottom="@dimen/mb_unit_x3"
+                    style="@style/MBTextAppearance.Overline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/mb_divider_title_overview"/>
+
+                <View
+                    android:id="@+id/mb_divider_title_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/mb_divider_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbtv_title_overview"
+                    app:layout_constraintBottom_toTopOf="@id/mbtv_overview_message"/>
+
+                <TextView
+                    android:id="@+id/mbtv_overview_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.message}"
+                    android:paddingTop="@dimen/mb_unit_x3"
+                    android:paddingBottom="@dimen/mb_unit_x3"
+                    style="@style/MBTextAppearance.Body2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mb_divider_title_overview"
+                    app:layout_constraintBottom_toTopOf="@id/mbgv_overview_divider"/>
+
+                <View
+                    android:id="@+id/mbgv_overview_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/mb_divider_color"
+                    android:visibility="@{safeUnbox(model.imageGridVisible)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbtv_overview_message"
+                    app:layout_constraintBottom_toTopOf="@id/mbrv_overview_images"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mbrv_overview_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_unit_x3"
+                    android:layout_marginBottom="@dimen/mb_unit_x3"
+                    android:visibility="@{safeUnbox(model.imageGridVisible)}"
+                    app:liveItems="@{model.imageList}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbgv_overview_divider"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- the spinning progress "bar" -->
+            <ProgressBar
+                android:id="@+id/mb_progressBar"
+                style="@style/MBLoadingSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="@dimen/mb_unit_x3"
+                android:visibility="@{safeUnbox(model.progressVisible)}"
+                android:progress="40"
+                tools:visibility="gone"/>
+
+            <!-- container for the bot answer -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mbcl_chatanswer_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_unit_x3"
+                android:layout_marginBottom="@dimen/mb_unit_x3"
+                android:orientation="vertical"
+                android:visibility="@{safeUnbox(model.botAnswerVisible)}"
+                tools:visibility="gone">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mbcl_bot_answer_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_support_chatbot"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/mbcl_bot_button_container">
+
+                    <TextView
+                        android:id="@+id/mbtv_title_possible_solution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/MBTextAppearance.Overline"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:text="@string/rssm_message_chat_bot_answer_label_from"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/mb_divider_title_possible_solution"/>
+
+                    <View
+                        android:id="@+id/mb_divider_title_possible_solution"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbtv_title_possible_solution"
+                        app:layout_constraintBottom_toTopOf="@id/mbtv_display_answer"/>
+
+                    <TextView
+                        android:id="@+id/mbtv_display_answer"
+                        style="@style/MBTextAppearance.Body2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        tools:text="@{model.botAnswer}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mb_divider_title_possible_solution"
+                        app:layout_constraintBottom_toTopOf="@id/mb_divider_share_button"/>
+
+                    <View
+                        android:id="@+id/mb_divider_share_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbtv_display_answer"
+                        app:layout_constraintBottom_toTopOf="@id/mdsupport_share_bot"/>
+
+                    <com.daimler.mbuikit.widgets.buttons.MBSecondaryTextButton
+                        android:id="@+id/mdsupport_share_bot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_share_small"
+                        android:drawableTint="@color/mb_grey2"
+                        android:paddingStart="@dimen/mb_margin_default"
+                        android:paddingEnd="40dp"
+                        android:text="@string/rssm_message_chat_bot_share"
+                        android:onClick="@{() -> model.onShareClick()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mb_divider_share_button"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- buttons to continue from the bot answer -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mbcl_bot_button_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbcl_bot_answer_container"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/mbtv_title_bot_success"
+                        style="@style/MBTextAppearance.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:text="@string/rssm_message_chat_bot_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/mbbtn_bot_positive"/>
+
+                    <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                        android:id="@+id/mbbtn_bot_positive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:text="@string/rssm_message_chat_bot_button_yes"
+                        android:textAllCaps="false"
+                        android:onClick="@{() -> model.resetAll()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbtv_title_bot_success"
+                        app:layout_constraintBottom_toTopOf="@id/mbbtn_bot_negative"/>
+
+                    <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                        android:id="@+id/mbbtn_bot_negative"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:text="@string/rssm_message_chat_bot_button_no"
+                        android:textAllCaps="false"
+                        android:onClick="@{() -> model.retryCacMail()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbbtn_bot_positive"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- CAC E-Mail has been send -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mbcl_cac_was_sent_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                android:visibility="@{safeUnbox(model.cacSuccessVisible)}"
+                tools:visibility="gone">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mbcl_success_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/mb_unit_x3"
+                    android:background="@drawable/bg_support_chatbot"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/mbcl_success_button_container">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/mbcl_success_header_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/mb_divider_success_header">
+
+                        <ImageView
+                            android:id="@+id/mbiv_success_header_image"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="@dimen/mb_margin_default"
+                            android:tint="@color/mb_status_success"
+                            android:src="@drawable/ic_checkmark_filled"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/mbtv_success_header_text"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/mbtv_success_header_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/MBTextAppearance.Overline"
+                            android:text="@string/rssm_message_chat_sent_success_title"
+                            app:layout_constraintStart_toEndOf="@id/mbiv_success_header_image"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/mb_divider_success_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbcl_success_header_box"
+                        app:layout_constraintBottom_toTopOf="@id/mbtv_cac_success_message"/>
+
+                    <TextView
+                        android:id="@+id/mbtv_cac_success_message"
+                        style="@style/MBTextAppearance.Body2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:text="@string/rssm_message_chat_sent_success_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mb_divider_success_header"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mbcl_success_button_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbcl_success_box"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/mbtv_send_anything_else"
+                        style="@style/MBTextAppearance.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:text="@string/rssm_message_chat_sent_anything_else"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/mbbtn_finished_more"/>
+
+                    <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                        android:id="@+id/mbbtn_finished_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_unit_x3"
+                        android:layout_marginBottom="@dimen/mb_unit_x3"
+                        android:src="@drawable/ic_close"
+                        android:text="@string/rssm_message_chat_sent_button_more"
+                        android:textAllCaps="false"
+                        android:onClick="@{() -> model.resetAll()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mbtv_send_anything_else"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- CAC email error -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mbcl_cac_was_error_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{safeUnbox(model.cacErrorVisible)}"
+                android:background="@drawable/bg_support_chatbot"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                tools:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mbcl_cac_error_message_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/mb_unit_x3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/mbiv_cac_error_header_image"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="@dimen/mb_margin_default"
+                        android:tint="@color/mb_status_error"
+                        android:src="@drawable/ic_error"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/mbtv_cac_error_header_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/mbtv_cac_error_header_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/MBTextAppearance.Overline"
+                        android:text="@string/rssm_message_chat_sent_error_title"
+                        app:layout_constraintStart_toEndOf="@id/mbiv_cac_error_header_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/mb_divider_cac_error_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/mb_divider_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mbcl_cac_error_message_header"
+                    app:layout_constraintBottom_toTopOf="@id/mb_support_error_message"/>
+
+                <TextView
+                    android:id="@+id/mb_support_error_message"
+                    style="@style/MBTextAppearance.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/mb_unit_x3"
+                    android:text="@{model.cacErrorMessage}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mb_divider_cac_error_header"
+                    app:layout_constraintBottom_toTopOf="@id/mb_support_btn_error_cancel"
+                    tools:text="Test"/>
+
+                <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                    android:id="@+id/mb_support_btn_error_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rssm_gobal_cancel"
+                    android:layout_margin="@dimen/mb_unit_x2"
+                    android:onClick="@{() -> model.resetAll()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/mb_support_btn_error_retry"
+                    app:layout_constraintTop_toBottomOf="@id/mb_support_error_message"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                    android:id="@+id/mb_support_btn_error_retry"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rssm_global_retry"
+                    android:layout_margin="@dimen/mb_unit_x2"
+                    android:onClick="@{() -> model.retryCacMail()}"
+                    app:layout_constraintStart_toEndOf="@id/mb_support_btn_error_cancel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mb_support_error_message"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <requestFocus />
+            </View>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

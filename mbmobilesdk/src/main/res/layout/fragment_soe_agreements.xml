@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.tou.soe.SoeAgreementsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:liveItems="@{model.items}" />
+
+                <View
+                    android:id="@+id/divider_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/mb_divider_height"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    android:background="@color/mb_divider_color"
+                    android:visibility="@{safeUnbox(model.itemsVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBSubtitle2TextView
+                    android:id="@+id/tv_mandatory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    android:text="@string/agreements_mandatory"
+                    android:visibility="@{safeUnbox(model.itemsVisible)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider_recycler" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:enabled="@{!safeUnbox(model.loading)}"
+                    android:onClick="@{() -> model.onSaveClicked()}"
+                    android:text="@string/agreements_btn_save"
+                    android:visibility="@{safeUnbox(model.itemsVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_mandatory" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                    android:id="@+id/btn_later"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    android:enabled="@{!safeUnbox(model.loading)}"
+                    android:onClick="@{() -> model.onLaterClicked()}"
+                    android:text="@string/agreements_btn_later"
+                    android:visibility="@{safeUnbox(model.itemsVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_save" />
+
+                <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{safeUnbox(model.loading)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

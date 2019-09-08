@@ -1,0 +1,6 @@
+{String1}=%1$s
+{String2}=%2$s
+{string1}=%1$s
+{string}=%s
+{Number1}=%1$d
+{Number2}=%2$d

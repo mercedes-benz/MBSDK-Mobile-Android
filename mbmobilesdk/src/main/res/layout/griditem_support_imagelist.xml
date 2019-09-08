@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.support.models.ImageItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="85dp"
+        android:layout_height="90dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/grid_item_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/bg_support_image_rounded"
+                android:onClick="@{() -> item.onAddClick()}"
+                android:scaleType="centerCrop"
+                app:bitmap="@{item.liveImage}"
+                tools:src="@drawable/lego_spaceman" />
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/grid_item_closer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/bg_support_image_close"
+            android:src="@drawable/ic_close"
+            android:tint="@color/mb_white"
+            android:onClick="@{() -> item.onRemoveClick()}"
+            android:visibility="@{safeUnbox(item.closeVisible)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

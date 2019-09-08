@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.tou.natcon.NatconItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/mb_margin_small"
+        android:paddingBottom="@dimen/mb_margin_small">
+
+        <com.daimler.mbuikit.widgets.checkboxes.MBCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={item.checked}"
+            android:onCheckedChanged="@{(v, checked) -> item.onCheckedChanged(checked)}"
+            app:emptyError="@{item.errorVisible}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_small"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:text="@{item.text}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkbox"
+            app:layout_constraintTop_toTopOf="parent"
+            app:movementMethod="@{item.movementMethod}"
+            tools:text="I aggree to the necessary storage and processing of personal data." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

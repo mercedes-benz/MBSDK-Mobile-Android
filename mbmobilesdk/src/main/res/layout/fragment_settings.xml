@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:andorid="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.settings.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:orientation="vertical"
+            andorid:layout_marginTop="@dimen/mb_margin_small">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/SettingRowElement"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_element_height">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_biometrics_pin"
+                    style="@style/SettingElementText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@string/settings_biometrics_id"
+                    android:visibility="@{model.showBiometrics}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/switch_biometrics_pin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.daimler.mbuikit.widgets.switches.MBSwitch
+                    android:id="@+id/switch_biometrics_pin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{safeUnbox(model.biometricsEnabled)}"
+                    android:onCheckedChanged="@{(v, isChecked) -> model.onBiometricsChanged(isChecked)}"
+                    android:visibility="@{model.showBiometrics}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_biometrics_pin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_biometrics_pin" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider_biometrics_pin"
+                style="@style/SettingDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pin_container"
+                style="@style/SettingRowElement"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_element_height"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="@{() -> model.onUserPinClicked()}">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_user_pin"
+                    style="@style/SettingElementText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@string/settings_pin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_pin_arrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_pin_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:colorFilter="@{@color/mb_black}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_user_pin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_user_pin" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                style="@style/SettingDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                andorid:layout_marginTop="0dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/units_container"
+                style="@style/SettingRowElement"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_element_height"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="@{() -> model.onUnitsClick()}">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_units"
+                    style="@style/SettingElementText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@string/settings_units"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_units_arrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_units_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:colorFilter="@{@color/mb_black}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_units"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_units" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                style="@style/SettingDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/SettingRowElement"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_element_height">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_push_notifications"
+                    style="@style/SettingElementText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@string/settings_notifications"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/switch_push_notifications"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.daimler.mbuikit.widgets.switches.MBSwitch
+                    android:id="@+id/switch_push_notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{safeUnbox(model.pushEnabled)}"
+                    android:enabled="@{safeUnbox(!model.loading)}"
+                    android:onCheckedChanged="@{(v, isChecked) -> model.onPushEnabledChanged(isChecked)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_push_notifications"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_push_notifications" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                style="@style/SettingDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/SettingRowElement"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_element_height">
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_tracking"
+                    style="@style/SettingElementText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@string/settings_tracking"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/switch_tracking"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.daimler.mbuikit.widgets.switches.MBSwitch
+                    android:id="@+id/switch_tracking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{safeUnbox(model.trackingEnabled)}"
+                    android:onCheckedChanged="@{(v, isChecked) -> model.onTrackingEnabledChanged(isChecked)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_tracking"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_tracking" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                style="@style/SettingDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+        </LinearLayout>
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.progressVisible)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

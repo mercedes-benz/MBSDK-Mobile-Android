@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleselection.VehicleInfoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true">
+
+                <com.daimler.mbmobilesdk.views.MBVehicleStageView
+                    android:id="@+id/view_stage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    app:carImage="@{model.carImage}"
+                    app:carTitle="@{model.carTitle}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:showFallbackImage="@{model.showFallbackImage}"
+                    tools:layout_height="100dp" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_vin_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="@string/activate_services_fin"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_vin_content"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_stage" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_vin_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@{model.carFin}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_vin_title"
+                    app:layout_constraintTop_toTopOf="@+id/tv_vin_title"
+                    tools:text="WDD12345678910" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_plate"
+                    style="@style/MBTextInputLayoutStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_vin_content">
+
+                    <com.daimler.mbuikit.widgets.edittexts.MBEditText
+                        style="@style/MBEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:hint="@string/activate_services_license_plate"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:text="@={model.licensePlate}"
+                        app:closeKeyboardOnDone="@{() -> model.onLicensePlateEntered()}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

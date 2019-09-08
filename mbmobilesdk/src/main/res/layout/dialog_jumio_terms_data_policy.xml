@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.jumio.dialogs.JumioTermsDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mb_default_background"
+        android:paddingBottom="@dimen/mb_unit_x2"
+        android:minWidth="@dimen/mb_dialog_min_width">
+
+        <TextView
+            style="@style/MBTextAppearance.H4.Serif"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/mb_margin_small"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:gravity="center"
+            android:text="@{model.title}"
+            android:visibility="@{model.title != null}"
+            android:textColor="@color/mb_black"
+            tools:text="Title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/mb_margin_large"
+            android:paddingTop="@dimen/mb_margin_default"
+            android:paddingEnd="@dimen/mb_margin_large"
+            android:gravity="center"
+            android:text="@{model.message}"
+            android:visibility="@{model.message != null}"
+            tools:text="@string/verification_terms_popup_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <com.daimler.mbuikit.widgets.checkboxes.MBCheckBox
+            android:id="@+id/checkbox_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:checked="@{model.termsAccepted}"
+            android:onClick="@{() -> model.onCheckClicked()}"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/accept_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:text="@string/verification_terms_popup_chekbox_title"
+            app:layout_constraintStart_toEndOf="@id/checkbox_accept"
+            app:layout_constraintTop_toTopOf="@id/checkbox_accept"
+            app:layout_constraintEnd_toEndOf="@id/description"/>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/mb_grey3"
+            app:layout_constraintTop_toBottomOf="@id/accept_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.daimler.mbuikit.widgets.buttons.MBSecondaryTextButton
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> model.onNegativeButtonClicked()}"
+            android:text="@{model.negativeButtonText}"
+            android:visibility="@{model.negativeButtonText != null}"
+            tools:text="Cancel"
+            app:layout_constraintTop_toBottomOf="@id/separator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/accept_button"/>
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryTextButton
+            android:id="@+id/accept_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> model.onPositiveButtonClicked()}"
+            android:text="@{model.positiveButtonText}"
+            android:visibility="@{model.positiveButtonText != null}"
+            tools:text="Accept"
+            app:layout_constraintTop_toTopOf="@id/cancel_button"
+            app:layout_constraintStart_toEndOf="@id/cancel_button"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

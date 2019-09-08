@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.serviceactivation.ServiceItem" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_service_height"
+        android:clickable="@{model.selectable}"
+        android:onClick="@{() -> model.onItemClicked()}">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_name,tv_hint" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{model.iconRes}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@{model.name}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_hint"
+            app:layout_constraintEnd_toStartOf="@+id/progress_activation"
+            app:layout_constraintStart_toEndOf="@+id/iv_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Fernabfrage Fahrzeugstatus Test Test" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:text="@{model.hint}"
+            android:textColor="@color/mb_grey2"
+            android:visibility="@{model.hint != null}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/progress_activation"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="Activation is processing..." />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress_activation"
+            android:layout_width="@dimen/item_service_spinner_size"
+            android:layout_height="@dimen/item_service_spinner_size"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:visibility="@{model.progressVisible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switch_activation"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.switches.MBSwitch
+            android:id="@+id/switch_activation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:checked="@{model.checked}"
+            android:enabled="@{model.changeable}"
+            android:onCheckedChanged="@{(v, isChecked) -> model.onSelectionToggled(isChecked)}"
+            android:paddingLeft="@dimen/mb_margin_small"
+            android:paddingTop="@dimen/item_service_switch_padding"
+            android:paddingRight="@dimen/mb_margin_small"
+            android:paddingBottom="@dimen/item_service_switch_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TODO icon -->
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_right"
+            android:visibility="@{model.selectable ? View.VISIBLE : View.INVISIBLE}"
+            app:colorFilter="@{@color/mb_black}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mb_divider_height"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

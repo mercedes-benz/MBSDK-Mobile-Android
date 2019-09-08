@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="JumioTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="netverify_scanOverlay">@color/jumio_white_alpha40</item>
+        <item name="netverify_scanBackground">@color/jumio_black_alpha50</item>
+
+        <item name="netverify_scanOverlayTemplateValid">@color/jumio_primary_dark</item>
+        <item name="netverify_scanOverlayTemplateInvalid">@color/jumio_grey200</item>
+        <item name="netverify_scanOverlayDetectedLine">@color/jumio_primary</item>
+        <item name="netverify_scanOverlayDetectedLineStroke">@color/jumio_white</item>
+
+        <item name="face_scanOverlayBackground">@color/jumio_black</item>
+        <item name="face_scanOverlayFeedbackText">@color/jumio_white</item>
+        <item name="face_scanOverlayFeedbackBackground">@color/jumio_primary</item>
+        <item name="face_scanOverlayProgress">@color/jumio_primary</item>
+        <item name="face_scanOverlayOval">@color/jumio_white</item>
+
+    </style>
+
+    <style name="JumioTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Jumioheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+</resources>

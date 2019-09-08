@@ -1,0 +1,129 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply from: '../deploy.gradle'
+
+apply from: '../licenses.gradle'
+
+apply from: '../secrets.gradle'
+
+apply from: '../ktlint.gradle'
+
+def properties = loadProperties("$rootDir/local.properties")
+def LD_DEV = 'LD_API_DEV'
+def LD_PROD = 'LD_API_PROD'
+def EMAIL_TEST = 'EMAIL_TEST'
+def IMAGE_PROVIDER_AUTHORITY = 'com.daimler.mbmobilesdk.imageprovider'
+def JUMIO_TOKEN = 'JUMIO_API_TOKEN'
+def JUMIO_SECRET = 'JUMIO_API_SECRET'
+
+android {
+    compileSdkVersion compiled_sdk_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [imageProviderAuthority: IMAGE_PROVIDER_AUTHORITY]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'LD_API_KEY_DEV', "\"" + properties.get(LD_DEV) + "\""
+        buildConfigField 'String', 'LD_API_KEY_PROD', "\"" + properties.get(LD_PROD) + "\""
+        buildConfigField 'String', 'RIS_SDK_VERSION', "\"$moduleVersion\""
+        buildConfigField 'String', 'JUMIO_API_TOKEN', "\"" + properties.get(JUMIO_TOKEN) +"\""
+        buildConfigField 'String', 'JUMIO_API_SECRET', "\"" + properties.get(JUMIO_SECRET) +"\""
+        buildConfigField 'String', 'TEST_EMAIL', "\"" + properties.get(EMAIL_TEST) + "\""
+        buildConfigField 'String', 'IMAGE_PROVIDER_AUTHORITY_SUFFIX', "\"" + IMAGE_PROVIDER_AUTHORITY + "\""
+    }
+
+    buildTypes {
+        debug {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        iaa {
+            initWith release
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "androidx.appcompat:appcompat:$appcompat_lib_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    api "androidx.biometric:biometric:$biometrics_version"
+
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    api "com.google.firebase:firebase-messaging:$firebase_messaging_version"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    api "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_version"
+
+    api "com.daimler.mm:MBCommonKit:$mb_common_version"
+    api "com.daimler.mm:MBUIKit:$mb_ui_version"
+    api "com.daimler.mm:MBIngressKit:$mb_ingress_version"
+    api "com.daimler.mm:MBCarKit:$mb_car_version"
+    api "com.daimler.mm:MBNetworkKit:$mb_network_version"
+    api "com.daimler.mm:MBLoggerKit:$mb_logger_version"
+    api "com.daimler.mm:MBRealmKit:$mb_realm_version"
+    api "com.daimler.mm:MBSupportKit:$mb_support_version"
+    api "com.daimler.mm:MBDeepLinkKit:$mb_deeplink_version"
+
+    api "com.mikhaellopez:circularimageview:$circular_image_version"
+    api "com.dlazaro66.qrcodereaderview:qrcodereaderview:$qr_reader_version"
+    api "com.squareup.retrofit2:converter-scalars:$scalar_version"
+
+    implementation "com.launchdarkly:launchdarkly-android-client-sdk:$launch_darkly_version"
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // jumio
+    api "com.jumio.android:core:${jumio_version}@aar"
+    api "com.jumio.android:bam:${jumio_version}@aar"
+    api "com.jumio.android:auth:${jumio_version}@aar"
+    api "com.jumio.android:nv:${jumio_version}@aar"
+    api "com.jumio.android:nv-mrz:${jumio_version}@aar"
+    api "com.jumio.android:face:${jumio_version}@aar"
+
+    //for core:
+    api "androidx.room:room-runtime:$room_version"
+
+    //only for face
+    api "com.facetec:zoom-authentication-hybrid:${zoom_version}@aar"
+
+    api "com.yandex.android:mobmetricalib:$app_metrica_version"
+
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "androidx.test:core:$test_core_version"
+    testImplementation "android.arch.core:core-testing:$test_arch_core_version"
+    testImplementation "com.google.truth:truth:$google_truth_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+}
+
+repositories {
+    mavenCentral()
+}

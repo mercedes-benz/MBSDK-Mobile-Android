@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.jumio.identitycheck.DocumentItem" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/jumio_item_container_height"
+        android:onClick="@{() -> item.onClickItem()}"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/jumio_item_height"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/jumio_item_img_size"
+                android:layout_height="@dimen/jumio_item_img_size"
+                android:padding="@dimen/padding_default"
+                android:src="@drawable/ic_public"/>
+
+            <TextView
+                style="@style/MBTextAppearance.Body1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_weight="1"
+                android:textColor="@color/mb_black"
+                android:gravity="center_vertical"
+                android:text="@{item.documentName}" />
+
+            <ImageView
+                android:layout_width="@dimen/jumio_next_img_size"
+                android:layout_height="@dimen/jumio_next_img_size"
+                android:tint="@android:color/black"
+                android:src="@drawable/ic_chevron_right"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mb_divider_height"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:background="@color/mb_grey3" />
+    </LinearLayout>
+</layout>

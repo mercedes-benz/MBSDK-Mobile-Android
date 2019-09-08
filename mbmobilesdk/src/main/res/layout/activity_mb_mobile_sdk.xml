@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.menu.MBMobileSDKViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/screen_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/content_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/mb_black"
+                app:contentInsetEnd="0dp"
+                app:contentInsetEndWithActions="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:onLongClick="@{() -> model.onToolbarLogoLongClicked()}"
+                    android:src="@drawable/logo_me_slogan"
+                    android:visibility="@{safeUnbox(model.logoVisible)}" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+                    android:id="@+id/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@{model.toolbarTitle}"
+                    android:textColor="@color/mb_white"
+                    android:visibility="@{safeUnbox(model.titleVisible)}"
+                    tools:text="Title" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.daimler.mbuikit.menu.MBMenuView
+            android:id="@+id/menu_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/mb_white"
+            app:footerText="@{model.footerText}"
+            app:items="@{model.menuItems}">
+
+            <com.daimler.mbmobilesdk.views.MBProfileMenuHeader
+                android:id="@+id/profile_menu_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:loadingData="@{model.loadingData}"
+                app:onHeaderClickListener="@{model.onProfileClickedListener}"
+                app:userId="@{model.userId}"
+                app:userName="@{model.userName}"
+                app:vehicleEnergyLevel="@{model.vehicleEnergyLevel}"
+                app:vehicleFuelType="@{model.vehicleFuelType}"
+                app:vehicleInfo="@{model.vehicleInfo}"
+                app:vehicleLocked="@{model.vehicleLocked}"
+                app:vehicleModel="@{model.vehicleModel}"
+                app:vehicleSelected="@{model.vehicleSelected}"
+                app:vehicleTankLevel="@{model.vehicleTankLevel}" />
+
+        </com.daimler.mbuikit.menu.MBMenuView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

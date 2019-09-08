@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.tou.natcon.BaseNatconViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_grey_background"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout
+                android:id="@+id/root_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{model.itemsLoaded}"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/g_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/g_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+                <TextView
+                    android:id="@+id/tv_headline"
+                    style="@style/MBTextAppearance.H4.Serif"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{model.headline}"
+                    app:layout_constraintEnd_toEndOf="@id/g_end"
+                    app:layout_constraintStart_toStartOf="@id/g_start"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/natcon_title" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBSubtitle2TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    android:gravity="center"
+                    android:text="@string/natcon_description"
+                    app:layout_constraintEnd_toEndOf="@id/g_end"
+                    app:layout_constraintStart_toStartOf="@id/g_start"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_headline" />
+
+                <com.daimler.mbuikit.widgets.checkboxes.MBCheckBox
+                    android:id="@+id/checkbox_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:onCheckedChanged="@{(v, checked) -> model.onAllCheckedChanged(checked)}"
+                    app:layout_constraintStart_toStartOf="@id/g_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_checkbox_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/mb_margin_default"
+                    android:text="@{model.description}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/g_end"
+                    app:layout_constraintStart_toEndOf="@id/checkbox_all"
+                    app:layout_constraintTop_toTopOf="@id/checkbox_all"
+                    tools:text="@string/natcon_terms_all" />
+
+            </com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout>
+
+            <com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout
+                android:id="@+id/root_individual"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:visibility="@{model.itemsLoaded}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/root_main">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/g_individual_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/g_individual_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBOverlineTextView
+                    android:id="@+id/tv_headline_individual"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="@string/natcon_individual_selection"
+                    app:layout_constraintEnd_toEndOf="@id/g_individual_end"
+                    app:layout_constraintStart_toStartOf="@id/g_individual_start"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/divider_individual"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:background="@color/mb_divider_color"
+                    app:layout_constraintEnd_toEndOf="@id/g_individual_end"
+                    app:layout_constraintStart_toStartOf="@id/g_individual_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_headline_individual" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_items"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:decorator="@{model.divider}"
+                    app:layout_constraintEnd_toEndOf="@id/g_individual_end"
+                    app:layout_constraintStart_toStartOf="@id/g_individual_start"
+                    app:layout_constraintTop_toBottomOf="@id/divider_individual"
+                    app:liveItems="@{model.items}"
+                    tools:listitem="@layout/item_natcon" />
+
+                <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+                    android:id="@+id/progress_approval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{safeUnbox(model.approvingProgressVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_items" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_default"
+                    android:onClick="@{() -> model.onSaveClicked()}"
+                    android:text="@string/natcon_button_save"
+                    app:layout_constraintEnd_toEndOf="@id/g_individual_end"
+                    app:layout_constraintStart_toStartOf="@id/g_individual_start"
+                    app:layout_constraintTop_toBottomOf="@id/progress_approval" />
+
+            </com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout>
+
+            <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+                android:id="@+id/progress_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{safeUnbox(model.loadingProgressVisible)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.profile.items.ProfileSelectableValuesItem" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/mb_margin_small"
+        android:paddingBottom="@dimen/mb_margin_small">
+
+        <com.daimler.mbmobilesdk.views.MBSelectableValuesView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:callback="@{(value) -> model.onValueChanged(value)}"
+            app:emptyItem="@{model.emptyItem}"
+            app:hint="@{model.hint}"
+            app:items="@{model.items}"
+            app:keySelection="@{model.keySelection}"
+            app:notifyKeys="@{model.notifyKeys}" />
+
+    </FrameLayout>
+
+</layout>

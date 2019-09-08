@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.support.SupportViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <TextView
+            android:id="@+id/tv_header_phone"
+            style="@style/MBTextAppearance.H4.Serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/support_call_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TODO icon -->
+        <ImageView
+            android:id="@+id/iv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:onClick="@{() -> model.onPhoneClicked()}"
+            android:src="@drawable/ic_phone"
+            app:colorFilter="@{@color/mb_black}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_header_phone" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:onClick="@{() -> model.onPhoneClicked()}"
+            android:text="@string/support_call_button"
+            android:textColor="@color/mb_accent_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_phone" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mb_divider_height"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintTop_toBottomOf="@+id/tv_number" />
+
+        <TextView
+            android:id="@+id/tv_header_mail"
+            style="@style/MBTextAppearance.H4.Serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:gravity="center"
+            android:text="@string/support_hint_message"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            tools:textColor="@color/mb_white" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/btn_send_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:onClick="@{() -> model.onSendMessageClicked()}"
+            android:text="@string/support_send_message"
+            app:layout_constraintTop_toBottomOf="@+id/tv_header_mail" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.progressVisible}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_send_message" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

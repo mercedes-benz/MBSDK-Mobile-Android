@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MBTextAndArrowView">
+        <attr name="text" format="string" />
+        <attr name="showDivider" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MBStageIndicatorView">
+        <attr name="stages" format="integer" />
+        <attr name="selectedStage" format="integer" />
+        <attr name="circleColor" format="color" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="circlePadding" format="dimension" />
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="dividerColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="VehiclePairingInformationView">
+        <attr name="infoStyle" format="enum">
+            <enum name="body" value="0"/>
+            <enum name="screen" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

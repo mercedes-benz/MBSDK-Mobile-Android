@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.daimler.mbuikit.widgets.checkboxes.MBCheckBox
+        android:id="@+id/checkbox_accept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mb_margin_default"
+        android:layout_marginStart="@dimen/mb_margin_large"
+        android:layout_marginEnd="@dimen/mb_margin_default"
+        android:text="@string/verification_terms_popup_chekbox_title"/>
+
+</LinearLayout>

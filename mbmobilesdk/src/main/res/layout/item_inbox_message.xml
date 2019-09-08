@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.graphics.Typeface" />
+        <import type="android.view.View" />
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.notificationcenter.presentation.messageoverview.InboxMessageItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/mb_unit_x4"
+        android:layout_marginStart="@dimen/mb_unit_x4"
+        android:layout_marginEnd="@dimen/mb_unit_x4"
+        android:background="@drawable/bg_message_item"
+        android:elevation="@dimen/mb_unit_x1"
+        android:layout_marginBottom="@dimen/mb_unit_x4">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{() -> item.onSelect()}"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/mb_unit_x6"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/mb_unit_x6" />
+
+        <View
+            android:id="@+id/v_read"
+            android:layout_width="@dimen/mb_unit_x2"
+            android:layout_height="@dimen/mb_unit_x2"
+            android:background="@drawable/bg_message_unread"
+            android:visibility="@{item.read() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/g_start"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"/>
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_sender"
+            android:textColor="@color/mb_grey2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_unit_x4"
+            android:layout_marginEnd="@dimen/mb_unit_x4"
+            android:lines="1"
+            android:text="@{item.sender()}"
+            tools:text="Mercedes-Benz Niderlassung Frankfurt"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintEnd_toStartOf="@id/tv_time"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_unit_x1"
+            android:text="@{item.title()}"
+            android:textColor="@{item.read() ? @color/mb_grey2 : @color/mb_black}"
+            app:layout_constraintTop_toBottomOf="@id/tv_sender"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            tools:text="Message Title"/>
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_unit_x1"
+            android:layout_marginEnd="@dimen/mb_unit_x7"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="@{item.content()}"
+            android:textColor="@{item.read() ? @color/mb_grey2 : @color/mb_black}"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/g_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Loremipsum dolor sit amet, consetetur samenatsasdfsdfasdf" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/mb_grey2"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sender"
+            app:layout_constraintEnd_toEndOf="@id/g_end"
+            android:text="@{item.time()}"
+            tools:text="08:00"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,46 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    apply from: 'versions.gradle'
+    apply from: 'android.gradle'
+    apply from: 'maven.gradle'
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_plugin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:$artifactory_version"
+        classpath "com.google.gms:google-services:$gms_services_version"
+        classpath 'com.jaredsburrows:gradle-license-plugin:0.8.42'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    apply plugin: "com.jfrog.artifactory"
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url deployRepositoryUrl
+            credentials {
+                username = mavenUser
+                password = mavenPassword
+            }
+        }
+        maven { url 'https://mobile-sdk.jumio.com' }
+        maven {
+            url azureUrl
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

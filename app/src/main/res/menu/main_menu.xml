@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/force_token_refresh"
+        android:title="@string/force_token_refresh"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/refresh_token"
+        android:title="@string/refresh_token"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/share_log_file"
+        android:title="@string/share_log_file"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/share_log_text"
+        android:title="@string/share_log_text"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/pin"
+        android:title="Pin Provider"
+        app:showAsAction="never" />
+</menu>

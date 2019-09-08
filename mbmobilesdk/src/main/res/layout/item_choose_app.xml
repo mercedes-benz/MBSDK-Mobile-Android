@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.familyapps.AppChooserItem" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onItemClicked()}"
+        android:paddingStart="@dimen/mb_margin_default"
+        android:paddingTop="@dimen/mb_margin_default"
+        android:paddingEnd="@dimen/mb_margin_large">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/family_apps_icon_size"
+            android:layout_height="@dimen/family_apps_icon_size"
+            android:layout_marginStart="@dimen/mb_margin_small"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/bg_app_item"
+            app:imageUrl="@{item.imageUrl}"
+            app:layout_constraintBottom_toTopOf="@+id/layout_separator"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_menu_mme" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:text="@{item.name}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@+id/container_layout"
+            app:layout_constraintEnd_toStartOf="@+id/image_select"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name Of the app " />
+
+        <LinearLayout
+            android:id="@+id/container_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:onClick="@{() -> item.onDescriptionClicked()}"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/image_select"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <!-- TODO icon -->
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_chevron_right"
+                app:colorFilter="@{@color/mb_black}"
+                app:rotate="@{item.isExpanded}" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBCaptionTextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/mb_margin_tiny"
+                android:text="@string/app_family_short_description"
+                android:textColor="@color/mb_grey2"
+                tools:text="Short description" />
+
+        </LinearLayout>
+
+        <com.daimler.mbuikit.widgets.textviews.MBCaptionTextView
+            android:id="@+id/textview3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_tiny"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:onClick="@{() -> item.onDescriptionClicked()}"
+            android:text="@{item.description}"
+            android:visibility="@{safeUnbox(item.isExpanded) ? View.VISIBLE : View.GONE}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@+id/layout_separator"
+            app:layout_constraintEnd_toStartOf="@+id/image_select"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/container_layout"
+            tools:text="Whole app description shown after click" />
+
+        <!-- TODO icon -->
+
+        <ImageView
+            android:id="@+id/image_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:animateLayoutChanges="true"
+            android:src="@drawable/ic_chevron_right"
+            app:colorFilter="@{@color/mb_black}"
+            app:layout_constraintBottom_toTopOf="@+id/layout_separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/layout_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mb_divider_height"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_layout"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

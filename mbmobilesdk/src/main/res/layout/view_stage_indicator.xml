@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="com.daimler.mbmobilesdk.views.MBStageIndicatorLayout">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+    <com.daimler.mbmobilesdk.views.MBStageIndicatorView
+        android:id="@+id/view_stages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        tools:selectedStage="2"
+        tools:stages="3" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+        android:id="@+id/tv_headline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mb_margin_default"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/view_stages"
+        tools:text="@string/assign_registered_successfully" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBSubtitle2TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mb_margin_default"
+        android:layout_marginBottom="@dimen/mb_margin_default"
+        android:textColor="@color/mb_text_color_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_headline" />
+
+</merge>

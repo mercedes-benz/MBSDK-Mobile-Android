@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.pin.UserPinViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_old_pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_description, edit_pin_old" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_old_pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{!model.initialPin}"
+            app:constraint_referenced_ids="tv_old_pin, edit_pin_old" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_new_pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/mb_black"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+                android:id="@+id/tv_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/mb_margin_large"
+                android:layout_marginEnd="@dimen/mb_margin_large"
+                android:singleLine="true"
+                android:text="@string/custom_pin_headline"
+                android:textColor="@color/mb_white"
+                tools:text="Merceses me PIN" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/custom_pin_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBCaptionTextView
+            android:id="@+id/tv_old_pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:text="@string/custom_pin_old"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+        <com.daimler.mbuikit.widgets.edittexts.MBPinTextInput
+            android:id="@+id/edit_pin_old"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:enabled="@{!safeUnbox(model.progressVisible)}"
+            android:inputType="numberPassword"
+            android:minHeight="48dp"
+            app:inputLength="@{model.pinDigits}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_old_pin"
+            app:pinListener="@{(s) -> model.onOldPinInputChanged(s)}"
+            app:spacing="@dimen/mb_margin_default" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBCaptionTextView
+            android:id="@+id/tv_new_pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:text="@string/custom_pin_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier_old_pin" />
+
+        <com.daimler.mbuikit.widgets.edittexts.MBPinTextInput
+            android:id="@+id/edit_pin_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_large"
+            android:enabled="@{!safeUnbox(model.progressVisible)}"
+            android:inputType="numberPassword"
+            android:minHeight="48dp"
+            app:inputLength="@{model.pinDigits}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_pin"
+            app:pinListener="@{(s) -> model.onNewPinInputChanged(s)}"
+            app:spacing="@dimen/mb_margin_default" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:enabled="@{!model.progressVisible}"
+            android:onClick="@{() -> model.onSaveClicked()}"
+            android:text="@string/custom_pin_button_save"
+            app:layout_constraintTop_toBottomOf="@+id/progress" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.progressVisible)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_pin_new" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

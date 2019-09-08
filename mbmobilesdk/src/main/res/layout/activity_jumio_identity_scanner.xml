@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.daimler.mbmobilesdk.jumio.identityScanner.IdentityScannerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".jumio.identityScanner.IdentityScannerActivity">
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{viewModel.uploading}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.jumio.nv.custom.NetverifyCustomConfirmationView
+            android:id="@+id/confirm_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/mb_default_background"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:visibility="@{!viewModel.scanState || !viewModel.uploaded || !viewModel.uploading}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_info"/>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/mb_default_background"
+            android:visibility="@{viewModel.scanState &amp;&amp; !viewModel.uploaded &amp;&amp; !viewModel.uploading}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sheet">
+
+            <com.jumio.nv.custom.NetverifyCustomScanView
+                android:id="@+id/scan_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/confirm_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/mb_default_background"
+            android:visibility="@{!viewModel.scanState &amp;&amp; !viewModel.uploaded}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sheet">
+
+            <TextView
+                style="@style/MBTextAppearance.H4.Serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                android:gravity="center"
+                android:text="@string/netverify_scanview_title_check"
+                android:textColor="@color/mb_black" />
+
+            <TextView
+                style="@style/MBTextAppearance.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_small"
+                android:gravity="center"
+                android:text="@string/netverify_scanview_snackbar_check"
+                android:textColor="@color/mb_grey2" />
+
+        </LinearLayout>
+
+        <com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout
+            android:id="@+id/sheet"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/jumio_bottom_card_height"
+            android:visibility="@{!viewModel.uploaded &amp;&amp; !viewModel.uploading}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                android:id="@+id/retry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                android:onClick="@{() -> viewModel.clickRetry()}"
+                android:text="@string/identity_check_record_again"
+                android:visibility="@{!viewModel.scanState}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                android:id="@+id/readable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_small"
+                android:onClick="clickReadable"
+                android:text="@string/identity_check_readable"
+                android:visibility="@{!viewModel.scanState}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/retry"/>
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                android:id="@+id/hint_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:gravity="start"
+                android:text="@{viewModel.stepText}"
+                android:textAllCaps="true"
+                android:textColor="@color/mb_grey2"
+                android:visibility="@{viewModel.scanState}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.daimler.mbuikit.widgets.textviews.MBHeadline5SerifTextView
+                android:id="@+id/hint_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hint_steps"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:gravity="start"
+                android:text="@{viewModel.hintTitleText}"
+                android:visibility="@{viewModel.scanState}"
+                app:layout_constraintTop_toBottomOf="@id/hint_steps"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                style="@style/MBTextAppearance.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@id/hint_title"
+                android:layout_marginTop="@dimen/mb_margin_small"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:gravity="start"
+                android:textColor="@color/mb_grey2"
+                android:text="@{viewModel.hintText}"
+                android:visibility="@{viewModel.scanState}"
+                app:layout_constraintTop_toBottomOf="@id/hint_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/mb_white"
+            android:visibility="@{viewModel.uploaded}"
+            tools:visibility="gone">
+
+            <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                android:onClick="next"
+                android:text="@string/verification_uploaded_next" />
+
+            <!-- TODO: take care after registration flow implementation -->
+            <com.daimler.mbuikit.widgets.buttons.MBPrimaryTextButton
+                android:id="@+id/legal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_default"
+                android:text="@string/general_button_legal_notices"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/next"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/jumio_success_img_size"
+                    android:layout_height="@dimen/jumio_success_img_size"
+                    android:layout_marginBottom="@dimen/mb_unit_x12"
+                    android:layout_marginTop="@dimen/mb_margin_large"
+                    android:src="@drawable/ic_checkmark_filled" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_small"
+                    android:gravity="center"
+                    android:text="@string/identity_check_upload_successful"
+                    android:textColor="@color/mb_black" />
+
+                <TextView
+                    style="@style/MBTextAppearance.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_small"
+                    android:gravity="center"
+                    android:text="@string/verification_uploaded_details"
+                    android:textColor="@color/jumio_black_alpha62" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

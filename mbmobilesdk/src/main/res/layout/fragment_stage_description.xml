@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehiclestage.StageDescriptionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mb_default_background">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/MBTextAppearance.H4.Serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{model.headline}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/assign_title" />
+
+        <View
+            android:id="@+id/divider_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mb_divider_height"
+            android:layout_marginLeft="@dimen/mb_margin_large"
+            android:layout_marginTop="@dimen/mb_margin_small"
+            android:layout_marginRight="@dimen/mb_margin_large"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/tv_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_small"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@{model.description}"
+            app:layout_constraintTop_toBottomOf="@+id/divider_title"
+            tools:text="@string/assign_text" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.progressVisible}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_text" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+            android:id="@+id/btn_linkage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginRight="@dimen/mb_margin_default"
+            android:onClick="@{() -> model.onActionClicked()}"
+            android:text="@{model.actionButtonText}"
+            app:layout_constraintTop_toBottomOf="@+id/progress"
+            tools:text="@string/assign_start" />
+
+        <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+            android:id="@+id/btn_later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginRight="@dimen/mb_margin_default"
+            android:onClick="@{() -> model.onLaterClicked()}"
+            android:text="@{model.cancelButtonText}"
+            app:layout_constraintTop_toBottomOf="@+id/btn_linkage"
+            tools:text="@string/assign_later" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

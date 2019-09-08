@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- original colors -->
+    <!--
+    <color name="colorPrimary">@color/jumiogreen</color>
+    <color name="colorPrimaryDark">@color/jumiogreen_dark</color>
+    <color name="colorAccent">#00B0FF</color>
+    -->
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="darkgrey_4D4D4D">#424242</color>
+    <color name="darkgrey_676767">#616161</color>
+
+    <color name="jumio_primary">@color/colorPrimary</color>
+    <color name="jumio_primary_dark">@color/colorPrimary</color>
+    <color name="jumio_grey200">#79798B</color>
+    <color name="jumio_white">#FFFFFF</color>
+
+</resources>

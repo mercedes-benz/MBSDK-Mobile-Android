@@ -1,0 +1,114 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'org.jetbrains.dokka-android'
+
+apply from: '../android.gradle'
+apply from: '../maven.gradle'
+
+ext {
+    KEY_SNAPSHOT = "snapshot"
+}
+
+artifactory {
+    contextUrl = mavenUrl
+    publish {
+        contextUrl = mavenUrl
+        repository {
+            repoKey = deployRepository
+            username = mavenUser
+            password = mavenPassword
+        }
+        defaults {
+            publications('aar')
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = moduleGroupId
+            artifactId = moduleArtifactId
+            if (isSnapshotBuild()) {
+                version = moduleSnapshotVersion
+            } else {
+                version = moduleVersion
+            }
+            artifact(generateJavadocJar)
+            artifact(generateSourcesJar)
+            // You need to invoke the gradle task assembleRelease for this module to be able
+            // to deploy an artifact.
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+
+            pom.withXml {
+                def dependencies = asNode().appendNode('dependencies')
+                configurations.implementation.allDependencies.each {
+                    if (isValidDependency(it)) {
+                        def dependency = dependencies.appendNode('dependency')
+                        dependency.appendNode('groupId', it.group)
+                        dependency.appendNode('artifactId', it.name)
+                        dependency.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url azureUrl
+            credentials {
+                username azureUsername
+                password azureToken
+            }
+        }
+    }
+}
+
+task dokkaJavadoc(type: dokka.class) {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/kdoc"
+}
+
+task dokkaJekyll(type: dokka.class) {
+    outputFormat = 'jekyll'
+    outputDirectory = "$buildDir/jekyll"
+}
+
+task dokkaGfm(type: dokka.class) {
+    outputFormat = 'gfm'
+    outputDirectory = "$buildDir/gfm"
+}
+
+task generateJavadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    classifier = 'kdoc'
+    from dokkaJavadoc.outputDirectory
+}
+
+task generateSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+/**
+ * Returns true if the given dependency has a group, name and version given and if
+ * the dependency is not a ProjectDependency.
+ */
+private static boolean isValidDependency(Dependency dependency) {
+    return dependency.group != null && dependency.name != null &&
+            dependency.version != 'unspecified' && !(dependency instanceof ProjectDependency)
+}
+
+/**
+ * Checks whether the gradle start parameters contain "snapshot" and casts this parameter
+ * to a boolean.
+ *
+ * @return true if the gradle start parameters contain "snapshot=true" or "snapshot=1" or
+ * "snapshot=y"
+ */
+private boolean isSnapshotBuild() {
+    def isSnapshot = gradle.startParameter.projectProperties.get(KEY_SNAPSHOT)
+    return isSnapshot?.toBoolean()
+}

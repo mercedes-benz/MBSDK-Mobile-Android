@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Mercedes me</string>
+
+    <string name="share_log_file">Share Log as file</string>
+    <string name="share_log_text">Share log as text</string>
+    <string name="log_export_file" translatable="false">log_export.txt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
+    <string name="jumio_btn_next">@string/verification_btn_next</string>
+    <string name="notification_center_title">Inbox</string>
+    <string name="notification_center_messages_title">Your Messages</string>
+
+    <string name="dealer_search_call">Call</string>
+    <string name="dealer_search_navigate">Navigate</string>
+    <string name="retailer_search_description">Enter a location or the name of a retailer inside the input field above.</string>
+    <string name="retailer_search_hint">Location or name of the dealer</string>
+    <string name="retailer_search_title">Search retailer</string>
+    <string name="profile_app_data_title">App Data</string>
+    <string name="legal_mercedes_me_tou">Mercedes me Terms of Use</string>
+    <string name="legal_foss">Free &amp; Open Source Software </string>
+    <string name="legal_app_support">App Support</string>
+
+    <!-- TODO: Remove after doc is updated -->
+    <string name="successful_identity_check_title" >Identity Check successful</string>
+    <string name="successful_identity_check_description" >The identity check was successfully completed. Your personal data has been adjusted accordingly.</string>
+    <string name="unsuccessful_identity_check_title" >Identity Check unsuccessful</string>
+    <string name="unsuccessful_identity_check_description" >Unfortunately, the identity check was not successful. This can have different reasons. Please try again with your valid identification document or visit a Mercedes-Benz retailer.</string>
+    <string name="identity_check_upload_successful">Upload successful</string>
+    <string name="identity_check_readable">Readable</string>
+    <string name="identity_check_record_again">Record again</string>
+    <string name="identity_check_steps">Step %1$d of %2$d</string>
+    <string name="identity_check_upload">Upload</string>
+</resources>

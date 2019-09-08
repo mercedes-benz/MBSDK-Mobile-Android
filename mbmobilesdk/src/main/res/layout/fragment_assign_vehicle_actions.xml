@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleassignment.AssignVehicleActionsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_grey_background">
+
+        <ScrollView
+            android:id="@+id/scroll_root"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@id/root_help"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Stage and Header -->
+
+                <com.daimler.mbmobilesdk.views.MBStageIndicatorLayout
+                    android:id="@+id/root_stages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/mb_margin_default"
+                    app:stageConfig="@{model.stageConfig}" />
+
+                <!-- QR-Code -->
+
+                <com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout
+                    android:id="@+id/root_qr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/group_assign_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{safeUnbox(model.initialAssignment)}"
+                        app:constraint_referenced_ids="tv_pairing, tv_preferred_way, divider_pairing" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+                        android:id="@+id/tv_pairing"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:text="@string/assign_toolbar"
+                        app:layout_constraintEnd_toEndOf="@id/g_end"
+                        app:layout_constraintStart_toStartOf="@id/g_start"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBSubtitle2TextView
+                        android:id="@+id/tv_preferred_way"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:text="@string/assign_choose_preferred_way"
+                        android:textColor="@color/mb_text_color_secondary"
+                        app:layout_constraintEnd_toEndOf="@id/g_end"
+                        app:layout_constraintStart_toStartOf="@id/g_start"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pairing" />
+
+                    <View
+                        android:id="@+id/divider_pairing"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/mb_divider_height"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintEnd_toEndOf="@id/g_end"
+                        app:layout_constraintStart_toStartOf="@id/g_start"
+                        app:layout_constraintTop_toBottomOf="@id/tv_preferred_way" />
+
+                    <ImageView
+                        android:id="@+id/iv_qr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_qr_code"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_headline_qr"
+                        app:layout_constraintStart_toStartOf="@id/g_start"
+                        app:layout_constraintTop_toTopOf="@id/tv_headline_qr" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBHeadline5SerifTextView
+                        android:id="@+id/tv_headline_qr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mb_margin_default"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:text="@string/assign_action_qr_headline"
+                        app:layout_constraintEnd_toEndOf="@id/g_end"
+                        app:layout_constraintStart_toEndOf="@id/iv_qr"
+                        app:layout_constraintTop_toBottomOf="@id/divider_pairing" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBSubtitle2TextView
+                        android:id="@+id/tv_qr_hint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:text="@string/assign_action_qr_hint"
+                        android:textColor="@color/mb_text_color_secondary"
+                        app:layout_constraintEnd_toEndOf="@id/g_end"
+                        app:layout_constraintStart_toStartOf="@id/g_start"
+                        app:layout_constraintTop_toBottomOf="@id/tv_headline_qr" />
+
+                    <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                        android:id="@+id/btn_start_qr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:layout_marginBottom="@dimen/mb_margin_default"
+                        android:onClick="@{() -> model.onQrClicked()}"
+                        android:text="@string/assign_action_qr_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/g_end"
+                        app:layout_constraintStart_toStartOf="@id/g_start"
+                        app:layout_constraintTop_toBottomOf="@id/tv_qr_hint" />
+
+                </com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout>
+
+                <!-- Pairing without QR -->
+
+                <com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout
+                    android:id="@+id/root_no_qr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_start_no_qr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_end_no_qr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBOverlineTextView
+                        android:id="@+id/tv_headline_no_qr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:text="@string/assign_action_pair_without_qr_hint"
+                        android:textColor="@color/mb_text_color_secondary"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- VIN -->
+
+                    <View
+                        android:id="@+id/divider_headline"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/mb_divider_height"
+                        android:layout_marginTop="@dimen/mb_margin_default"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toBottomOf="@id/tv_headline_no_qr" />
+
+                    <ImageView
+                        android:id="@+id/iv_keyboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_keyboard"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_enter_vin"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toTopOf="@id/tv_enter_vin" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                        android:id="@+id/tv_enter_vin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mb_margin_default"
+                        android:onClick="@{() -> model.onEnterVinClicked()}"
+                        android:paddingTop="@dimen/mb_margin_default"
+                        android:paddingBottom="@dimen/mb_margin_default"
+                        android:text="@string/assign_action_enter_vin"
+                        app:layout_constraintEnd_toStartOf="@id/iv_arrow_vin"
+                        app:layout_constraintStart_toEndOf="@id/iv_keyboard"
+                        app:layout_constraintTop_toBottomOf="@id/divider_headline" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_vin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_chevron_right"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_enter_vin"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintTop_toTopOf="@id/tv_enter_vin" />
+
+                    <!-- Info Call -->
+
+                    <View
+                        android:id="@+id/divider_enter_vin"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/mb_divider_height"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toBottomOf="@id/tv_enter_vin" />
+
+                    <ImageView
+                        android:id="@+id/iv_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_info_call"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toTopOf="@id/tv_info_call" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                        android:id="@+id/tv_info_call"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mb_margin_default"
+                        android:onClick="@{() -> model.onInfoCallClicked()}"
+                        android:paddingTop="@dimen/mb_margin_default"
+                        android:paddingBottom="@dimen/mb_margin_default"
+                        android:text="@string/assign_action_info_call"
+                        app:layout_constraintEnd_toStartOf="@id/iv_arrow_call"
+                        app:layout_constraintStart_toEndOf="@id/iv_call"
+                        app:layout_constraintTop_toBottomOf="@id/divider_enter_vin" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_chevron_right"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_info_call"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintTop_toTopOf="@id/tv_info_call" />
+
+                    <!-- Retailer -->
+
+                    <View
+                        android:id="@+id/divider_call"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/mb_divider_height"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toBottomOf="@id/tv_info_call" />
+
+                    <ImageView
+                        android:id="@+id/iv_retailer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_location"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_search_retailer"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toTopOf="@id/tv_search_retailer" />
+
+                    <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                        android:id="@+id/tv_search_retailer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mb_margin_default"
+                        android:onClick="@{() -> model.onSearchRetailerClicked()}"
+                        android:paddingTop="@dimen/mb_margin_default"
+                        android:paddingBottom="@dimen/mb_margin_default"
+                        android:text="@string/assign_action_search_retailer"
+                        app:layout_constraintEnd_toStartOf="@id/iv_arrow_retailer"
+                        app:layout_constraintStart_toEndOf="@id/iv_retailer"
+                        app:layout_constraintTop_toBottomOf="@id/divider_call" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_retailer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_chevron_right"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_search_retailer"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintTop_toTopOf="@id/tv_search_retailer" />
+
+                    <View
+                        android:id="@+id/divider_retailer"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/mb_divider_height"
+                        android:layout_marginBottom="@dimen/mb_margin_default"
+                        android:background="@color/mb_divider_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/g_end_no_qr"
+                        app:layout_constraintStart_toStartOf="@id/g_start_no_qr"
+                        app:layout_constraintTop_toBottomOf="@id/tv_search_retailer" />
+
+                </com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <!-- Help -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_help"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/mb_white"
+            android:paddingTop="@dimen/mb_margin_default"
+            android:paddingBottom="@dimen/mb_margin_default"
+            android:visibility="@{safeUnbox(model.initialAssignment)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_start_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_end_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+            <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                android:id="@+id/btn_help"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mb_margin_small"
+                android:onClick="@{() -> model.onHelpClicked()}"
+                android:text="@string/support_title"
+                app:layout_constraintEnd_toStartOf="@id/btn_later"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@id/g_start_help"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                android:id="@+id/btn_later"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_small"
+                android:onClick="@{() -> model.onLaterClicked()}"
+                android:text="@string/assign_later"
+                app:layout_constraintEnd_toEndOf="@id/g_end_help"
+                app:layout_constraintStart_toEndOf="@id/btn_help"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

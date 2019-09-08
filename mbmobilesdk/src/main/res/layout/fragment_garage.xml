@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleselection.GarageViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_grey_background">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_vehicles"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:orientation="horizontal"
+                    app:decorator="@{model.itemDecoration}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:liveItems="@{model.vehicles}"
+                    app:smoothScrollPosition="@{model.scrollPosition}"
+                    app:snapHelper="@{model.snapHelper}"
+                    app:snapListener="@{(pos) -> model.onSnapPositionChanged(pos)}"
+                    tools:listitem="@layout/item_vehicle_garage" />
+
+                <FrameLayout
+                    android:id="@+id/root_information"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:elevation="15dp"
+                    android:orientation="vertical"
+                    android:outlineProvider="bounds"
+                    android:paddingTop="2dp"
+                    android:visibility="@{safeUnbox(model.informationContentAvailable)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_vehicles">
+
+                    <com.daimler.mbmobilesdk.views.GarageVehicleInformationView
+                        android:id="@+id/view_vehicle_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/mb_white"
+                        android:paddingBottom="@dimen/mb_margin_default"
+                        android:visibility="@{safeUnbox(model.vehicleInformationVisible)}"
+                        app:garageVehicle="@{model.currentGarageVehicle}"
+                        app:vehicleInformationListener="@{model}" />
+
+                    <com.daimler.mbmobilesdk.views.VehiclePairingInformationView
+                        android:id="@+id/view_pairing_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/mb_grey_background"
+                        android:visibility="@{safeUnbox(model.pairingInformationVisible)}"
+                        app:infoStyle="body"
+                        tools:visibility="gone" />
+
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.loading)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

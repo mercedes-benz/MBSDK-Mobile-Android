@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.vehicleselection.PendingVehicleGarageItem" />
+
+        <import type="com.daimler.mbmobilesdk.vehicleselection.PendingVehicleGarageItem.PendingAction" />
+    </data>
+
+    <com.daimler.mbmobilesdk.views.GarageItemLayout
+        android:layout_width="@dimen/garage_vehicle_width"
+        android:layout_height="@dimen/garage_vehicle_height"
+        android:layout_marginTop="@dimen/mb_margin_small"
+        android:layout_marginBottom="@dimen/mb_margin_small"
+        android:background="@drawable/bg_vehicle_item_new"
+        android:onClick="@{() -> item.onItemClicked()}"
+        app:userVisible="@{item.userVisible}">
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline5SerifTextView
+            android:id="@+id/tv_license_plate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/mb_margin_default"
+            android:text="@{item.pendingAction == PendingAction.ASSIGN ? @string/selector_status_pairing : @string/selector_status_disconnecting}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="vehicle pairing process" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/spinner_progress"
+            android:layout_width="@dimen/garage_vehicle_pending_spinner_size"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_license_plate" />
+
+    </com.daimler.mbmobilesdk.views.GarageItemLayout>
+
+</layout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_show_onboarding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Onboarding"
+        app:layout_constraintBottom_toTopOf="@id/btn_show_login_ui"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_show_login_ui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Login UI"
+        app:layout_constraintBottom_toTopOf="@id/btn_vehicle_assignment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_show_onboarding"/>
+
+    <Button
+        android:id="@+id/btn_vehicle_assignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehicle Assignment"
+        app:layout_constraintBottom_toTopOf="@id/btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_show_login_ui"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login"
+        app:layout_constraintBottom_toTopOf="@id/btn_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_vehicle_assignment"/>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        app:layout_constraintBottom_toTopOf="@id/btn_login_native"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"/>
+
+    <Button
+        android:id="@+id/btn_login_native"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login UC"
+        app:layout_constraintBottom_toTopOf="@id/btn_get_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_logout"/>
+
+    <Button
+        android:id="@+id/btn_get_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get user"
+        app:layout_constraintBottom_toTopOf="@id/btn_fetch_soe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_native"/>
+
+    <Button
+        android:id="@+id/btn_fetch_soe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOE TOU"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_get_user" />
+
+    <Button
+        android:id="@+id/btn_jumio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jumio"
+        app:layout_constraintBottom_toTopOf="@id/btn_clear_caches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_fetch_soe"/>
+
+    <Button
+        android:id="@+id/btn_clear_caches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clear caches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_jumio"/>
+
+    <Button
+        android:id="@+id/btn_inbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_clear_caches"/>
+
+    <TextView
+        android:id="@+id/tv_login_started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login started"
+        app:layout_constraintBottom_toBottomOf="@id/tv_logout_started"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_clear_caches"/>
+
+    <TextView
+        android:id="@+id/tv_logout_started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout started"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_started" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleassignment.SearchMerchantViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/mb_black"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/retailer_search_title"
+                    android:textColor="@color/mb_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_small"
+                    android:onClick="@{() -> model.onBackClicked()}"
+                    android:src="@drawable/ic_arrow_back"
+                    android:tint="@color/mb_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/search_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mb_black"
+            android:paddingTop="@dimen/mb_margin_small"
+            android:paddingBottom="@dimen/mb_margin_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <EditText
+                android:id="@+id/edit_merchant_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:afterTextChanged="@{(editable) -> model.onMerchantTextChanged(editable)}"
+                android:background="@drawable/bg_input_search"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="@dimen/mb_margin_small"
+                android:hint="@string/retailer_search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:padding="@dimen/mb_margin_small"
+                android:textColor="@color/mb_black"
+                android:textColorHint="@color/mb_grey2" />
+
+        </FrameLayout>
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{ model.showProgress }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_merchants"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/mb_grey_background"
+            android:nestedScrollingEnabled="true"
+            android:visibility="@{safeUnbox(model.resultsVisible)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_frame"
+            app:liveItems="@{model.items}"
+            tools:visibility="gone" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_no_listings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.noResultsHintVisible)}"
+            app:constraint_referenced_ids="iv_no_listings, tv_no_listings_headline, tv_no_listings_description"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_no_listings"
+            android:layout_width="@dimen/dealer_search_empty_icon_size"
+            android:layout_height="@dimen/dealer_search_empty_icon_size"
+            android:src="@drawable/ic_search"
+            android:tint="@color/mb_grey3"
+            android:layout_marginBottom="@dimen/mb_margin_large"
+            app:layout_constraintBottom_toTopOf="@id/tv_no_listings_headline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+            android:id="@+id/tv_no_listings_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/dealer_search_no_results_headline"
+            android:textColor="@color/mb_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:textSize="@dimen/mb_font_size_headline_4" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_no_listings_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/dealer_search_no_results_description"
+            android:textColor="@color/mb_grey2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_no_listings_headline" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(!model.noResultsHintVisible) &amp;&amp; safeUnbox(!model.resultsVisible)}"
+            app:constraint_referenced_ids="iv_search, tv_search_headline, tv_search_description"
+            tools:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/dealer_search_empty_icon_size"
+            android:layout_height="@dimen/dealer_search_empty_icon_size"
+            android:layout_marginBottom="@dimen/mb_margin_large"
+            android:src="@drawable/ic_search"
+            android:tint="@color/mb_grey3"
+            app:layout_constraintBottom_toTopOf="@id/tv_search_headline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+            android:id="@+id/tv_search_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/retailer_search_title"
+            android:textColor="@color/mb_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:textSize="@dimen/mb_font_size_headline_4" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+            android:id="@+id/tv_search_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_default"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/retailer_search_description"
+            android:textColor="@color/mb_grey2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_search_headline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

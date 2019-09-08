@@ -1,0 +1,27 @@
+apply from: "$rootDir/secrets.gradle"
+
+def mavenProperties = loadProperties("$rootDir/local.properties")
+def MAVEN_USER = "MAVEN_USER"
+def MAVEN_PW = "MAVEN_PW"
+def AZURE_USER = "AZURE_USER"
+def AZURE_TOKEN = "AZURE_TOKEN"
+
+ext {
+    mavenUrl = 'https://mcmea.es.corpintra.net/artifactory/'
+    mainRepository = 'RS-maven-local'
+    deployRepository = 'RS-Maven-Modules'
+    mainRepositoryUrl = "${mavenUrl}${mainRepository}"
+    deployRepositoryUrl = "${mavenUrl}${deployRepository}"
+
+    moduleGroupId = 'com.daimler.mm'
+    moduleArtifactId = 'MBMobileSDK'
+    moduleVersion = '1.0-iaa'
+    moduleSnapshotVersion = '1.1.0-SNAPSHOT'
+
+    mavenUser = mavenProperties.get(MAVEN_USER)
+    mavenPassword = mavenProperties.get(MAVEN_PW)
+
+    azureUrl = 'https://pkgs.dev.azure.com/daimler-ris/sdk/_packaging/release/maven/v1'
+    azureUsername = mavenProperties.get(AZURE_USER)
+    azureToken = mavenProperties.get(AZURE_TOKEN)
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.vehicleselection.AddVehicleGarageItem" />
+    </data>
+
+    <com.daimler.mbmobilesdk.views.GarageItemLayout
+        android:layout_width="@dimen/garage_vehicle_width"
+        android:layout_height="@dimen/garage_vehicle_height"
+        android:layout_marginTop="@dimen/mb_margin_small"
+        android:layout_marginBottom="@dimen/mb_margin_small"
+        android:background="@drawable/bg_vehicle_item_new"
+        android:onClick="@{() -> item.onItemClicked()}"
+        app:userVisible="@{item.userVisible}">
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline5SerifTextView
+            android:id="@+id/tv_license_plate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/mb_margin_default"
+            android:text="@string/selector_add_car"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_vehicle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:src="@drawable/add_filled"
+            app:colorFilter="@{@color/mb_accent_primary}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_activation_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_license_plate" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBHeadline5SerifTextView
+            android:id="@+id/tv_activation_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mb_margin_small"
+            android:layout_marginEnd="@dimen/mb_margin_small"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:text="@string/selector_car_selection_status_start_pairing"
+            android:textColor="@color/mb_accent_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </com.daimler.mbmobilesdk.views.GarageItemLayout>
+
+</layout>

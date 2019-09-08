@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.send2car.SendLocationToCarViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mb_default_background"
+        android:orientation="vertical">
+
+        <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+            android:id="@+id/location_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mb_black"
+            android:padding="@dimen/mb_margin_default"
+            android:text="@{model.locationText}"
+            android:textColor="@color/mb_white"
+            android:visibility="@{!model.progressVisible &amp;&amp; TextUtils.isEmpty(model.statusText)}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Test" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vehicles_list"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="@{!model.progressVisible &amp;&amp; TextUtils.isEmpty(model.statusText)}"
+            app:layout_constraintTop_toBottomOf="@id/location_title"
+            app:liveItems="@{model.vehicles}" />
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/mb_margin_large"
+            android:visibility="@{model.progressVisible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mb_margin_large"
+            android:text="@{model.statusText}"
+            android:visibility="@{!model.progressVisible &amp;&amp; !TextUtils.isEmpty(model.statusText)}"
+            tools:text="Error text" />
+
+    </LinearLayout>
+
+</layout>

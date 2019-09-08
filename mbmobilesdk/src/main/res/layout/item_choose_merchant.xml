@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.vehicleassignment.MerchantChooserItem" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onShowDealerActionDialog()}"
+        android:layout_marginBottom="@dimen/mb_margin_default"
+        android:paddingStart="@dimen/mb_margin_default"
+        android:paddingBottom="@dimen/mb_margin_default"
+        android:paddingTop="@dimen/mb_margin_default"
+        android:paddingEnd="@dimen/mb_margin_default">
+
+        <TextView
+            android:id="@+id/text_merchant_name"
+            style="@style/MBTextAppearance.H6.Serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ item.name }"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Autoservice Leipzig-Mitte safasfjk sakfjakslfj " />
+
+        <View
+            android:id="@+id/layout_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mb_divider_height"
+            android:layout_marginTop="@dimen/mb_margin_default"
+            android:background="@color/mb_divider_color"
+            app:layout_constraintTop_toBottomOf="@id/text_merchant_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/text_work_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:text="@{ item.openingHours }"
+            android:textColor="@color/mb_grey2"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_separator"
+            tools:text="Geöffnet - schließt um XYZ" />
+
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+            android:id="@+id/text_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_small"
+            android:text="@{ item.address }"
+            android:textColor="@color/mb_grey2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_work_time"
+            tools:text="Richard-Lehmann-Straße 120" />
+        <!--
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/container_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:onClick="@{ () -> item.onPhoneClick() }"
+            app:layout_constraintEnd_toStartOf="@+id/container_directions"
+            app:layout_constraintTop_toTopOf="@id/container_directions"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/mb_accent_primary"
+                app:srcCompat="@drawable/ic_phone" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dealer_search_call"
+                android:textColor="@color/mb_accent_primary"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/container_directions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mb_margin_large"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:gravity="center"
+            android:onClick="@{ () -> item.onDirectionsClick() }"
+            app:layout_constraintTop_toBottomOf="@+id/layout_separator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_directions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> item.onDirectionsClick() }"
+            android:tint="@color/mb_accent_primary"
+            app:srcCompat="@drawable/ic_navigation" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dealer_search_navigate"
+                android:textColor="@color/mb_accent_primary"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        -->
+
+    </com.daimler.mbuikit.widgets.layouts.MBElevatedConstraintLayout>
+
+</layout>

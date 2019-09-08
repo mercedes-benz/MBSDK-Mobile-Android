@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.serviceactivation.ServiceOverviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/mb_black"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.daimler.mbuikit.widgets.textviews.MBSubtitle1TextView
+                android:id="@+id/tv_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/mb_margin_large"
+                android:layout_marginEnd="@dimen/mb_margin_large"
+                android:singleLine="true"
+                android:text="@string/activate_services_title"
+                android:textColor="@color/mb_white" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true">
+
+                <com.daimler.mbmobilesdk.views.MBVehicleStageView
+                    android:id="@+id/view_stage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    app:carImage="@{model.carImage}"
+                    app:carTitle="@{model.carTitle}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:showFallbackImage="@{model.showFallbackImage}"
+                    tools:layout_height="100dp" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_vin_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:text="@string/activate_services_fin"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_vin_content"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_stage" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                    android:id="@+id/tv_vin_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:text="@{model.carFin}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_vin_title"
+                    app:layout_constraintTop_toTopOf="@+id/tv_vin_title"
+                    tools:text="WDD12345678910" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_plate"
+                    style="@style/MBTextInputLayoutStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_vin_content">
+
+                    <com.daimler.mbuikit.widgets.edittexts.MBEditText
+                        style="@style/MBEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:hint="@string/activate_services_license_plate"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:text="@={model.licensePlate}"
+                        app:closeKeyboardOnDone="@{() -> model.onLicensePlateEntered()}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_plate"
+                    app:liveItems="@{model.serviceItems}" />
+
+                <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:visibility="@{safeUnbox(model.progressVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_plate" />
+
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                    android:id="@+id/btn_activate_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginRight="@dimen/mb_margin_default"
+                    android:enabled="@{!safeUnbox(model.progressVisible)}"
+                    android:onClick="@{() -> model.onActivateAllClicked()}"
+                    android:text="@string/activate_services_activate_all_services_button_title"
+                    android:visibility="@{safeUnbox(model.activateServicesButtonVisible)}"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_services" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                    android:id="@+id/btn_ready"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mb_margin_default"
+                    android:layout_marginRight="@dimen/mb_margin_default"
+                    android:layout_marginBottom="@dimen/mb_margin_small"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    android:onClick="@{() -> model.onReadyClicked()}"
+                    android:text="@string/general_ready"
+                    android:visibility="@{safeUnbox(model.readyButtonVisible)}"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_activate_all" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

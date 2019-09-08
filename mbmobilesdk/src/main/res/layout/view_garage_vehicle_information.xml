@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+        android:id="@+id/tv_model"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_default"
+        android:layout_marginEnd="@dimen/mb_margin_default"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="A 250 4Matic With a Longer text to check the wrapping of the model name"
+        tools:textSize="@dimen/mb_font_size_headline_4" />
+
+    <ImageView
+        android:id="@+id/image_lock"
+        android:layout_width="@dimen/mb_menu_header_icon_size"
+        android:layout_height="@dimen/mb_menu_header_icon_size"
+        app:layout_constraintEnd_toStartOf="@+id/tv_lock_state"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/g_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_model"
+        android:tint="@color/mb_grey2"
+        tools:src="@drawable/ic_error" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+        android:id="@+id/tv_lock_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_small"
+        app:layout_constraintBottom_toBottomOf="@id/image_lock"
+        app:layout_constraintEnd_toStartOf="@+id/image_tank"
+        app:layout_constraintStart_toEndOf="@id/image_lock"
+        app:layout_constraintTop_toTopOf="@id/image_lock"
+        tools:text="Locked" />
+
+    <ImageView
+        android:id="@+id/image_tank"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:layout_marginStart="@dimen/mb_margin_default"
+        android:src="@drawable/ic_fuel"
+        app:layout_constraintBottom_toBottomOf="@id/image_lock"
+        app:layout_constraintEnd_toStartOf="@+id/tv_tank"
+        app:layout_constraintStart_toEndOf="@id/tv_lock_state"
+        app:layout_constraintTop_toTopOf="@id/image_lock" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+        android:id="@+id/tv_tank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_small"
+        android:text="@{model.tankLevel}"
+        app:layout_constraintBottom_toBottomOf="@id/image_tank"
+        app:layout_constraintEnd_toEndOf="@+id/g_end"
+        app:layout_constraintStart_toEndOf="@id/image_tank"
+        app:layout_constraintTop_toTopOf="@id/image_tank"
+        tools:text="78 %" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="image_lock, tv_lock_state, image_tank, tv_tank" />
+
+    <View
+        android:id="@+id/divider_top"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/mb_divider_height"
+        android:layout_marginTop="@dimen/mb_margin_default"
+        android:background="@color/mb_divider_color"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+        android:id="@+id/button_vehicle_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mb_margin_default"
+        android:paddingTop="@dimen/mb_margin_default"
+        android:paddingBottom="@dimen/mb_margin_default"
+        android:text="@string/selector_vehicle_information"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@+id/divider_top" />
+
+    <ImageView
+        android:id="@+id/button_vehicle_info_decoration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/button_vehicle_info"
+        app:layout_constraintEnd_toEndOf="@id/button_vehicle_info"
+        app:layout_constraintTop_toTopOf="@id/button_vehicle_info" />
+
+    <View
+        android:id="@+id/divider_vehicle_info"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/mb_divider_height"
+        android:background="@color/mb_divider_color"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/button_vehicle_info" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+        android:id="@+id/button_vehicle_services"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mb_margin_default"
+        android:paddingTop="@dimen/mb_margin_default"
+        android:paddingBottom="@dimen/mb_margin_default"
+        android:text="@string/selector_connect_services"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/divider_vehicle_info" />
+
+    <ImageView
+        android:id="@+id/button_vehicle_services_decoration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/button_vehicle_services"
+        app:layout_constraintEnd_toEndOf="@id/button_vehicle_services"
+        app:layout_constraintTop_toTopOf="@id/button_vehicle_services" />
+
+    <View
+        android:id="@+id/divider_services"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/mb_divider_height"
+        android:background="@color/mb_divider_color"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/button_vehicle_services" />
+
+    <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+        android:id="@+id/button_vehicle_user_management"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mb_margin_default"
+        android:paddingTop="@dimen/mb_margin_default"
+        android:paddingBottom="@dimen/mb_margin_default"
+        android:text="@string/selector_user_management"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/divider_services" />
+
+    <ImageView
+        android:id="@+id/button_vehicle_user_management_decoration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/button_vehicle_user_management"
+        app:layout_constraintEnd_toEndOf="@id/button_vehicle_user_management"
+        app:layout_constraintTop_toTopOf="@id/button_vehicle_user_management" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/mb_divider_height"
+        android:background="@color/mb_divider_color"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/button_vehicle_user_management" />
+
+</merge>

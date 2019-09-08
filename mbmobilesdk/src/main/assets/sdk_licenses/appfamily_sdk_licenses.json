@@ -1,0 +1,415 @@
+{
+  "licenses": [
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "3.1.3",
+      "dependency": "com.android.databinding:adapters:3.1.3",
+      "name": "Adapters",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "27.1.1",
+      "dependency": "com.android.support:appcompat-v7:27.1.1",
+      "name": "Android AppCompat Library v7",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "1.1.3",
+      "dependency": "com.android.support.constraint:constraint-layout:1.1.3",
+      "name": "Android ConstraintLayout",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "27.1.1",
+      "dependency": "com.android.support:design:27.1.1",
+      "name": "Android Design Support Library",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "1.1.1",
+      "dependency": "android.arch.lifecycle:extensions:1.1.1",
+      "name": "Android Lifecycle Extensions",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "1.1.1",
+      "dependency": "android.arch.lifecycle:runtime:1.1.1",
+      "name": "Android Lifecycle Runtime",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "27.1.1",
+      "dependency": "com.android.support:support-annotations:27.1.1",
+      "name": "Android Support Library Annotations",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "0.7.0",
+      "dependency": "net.openid:appauth:0.7.0",
+      "name": "AppAuth for Android",
+      "fileUrl": "https://raw.githubusercontent.com/openid/AppAuth-Android/master/LICENSE",
+      "file": "appauth.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "3.2.0",
+      "dependency": "com.mikhaellopez:circularimageview:3.2.0",
+      "name": "Circularimageview",
+      "fileUrl": "https://raw.githubusercontent.com/lopspower/CircularImageView/master/LICENSE",
+      "file": "circularimageview.txt",
+      "licenses": [
+        {
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": null,
+      "dependency": "com.squareup.retrofit2:converter-gson:2.4.0",
+      "name": "Converter: Gson",
+      "fileUrl": "https://raw.githubusercontent.com/square/retrofit/master/LICENSE.txt",
+      "file": "converter_gson.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Apache 2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": null,
+      "dependency": "com.squareup.retrofit2:converter-scalars:2.4.0",
+      "name": "Converter: Java Scalars",
+      "fileUrl": "https://raw.githubusercontent.com/square/retrofit/master/LICENSE.txt",
+      "file": "converter_scalars.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Apache 2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "3.1.3",
+      "dependency": "com.android.databinding:baseLibrary:3.1.3",
+      "name": "Data Binding Base Library",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "16.0.7",
+      "dependency": "com.google.firebase:firebase-core:16.0.7",
+      "name": "Firebase-core",
+      "fileUrl": "https://raw.githubusercontent.com/firebase/firebase-android-sdk/master/LICENSE",
+      "file": "firebase_core.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Android Software Development Kit License",
+          "url": "https://developer.android.com/studio/terms.html"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "17.3.4",
+      "dependency": "com.google.firebase:firebase-messaging:17.3.4",
+      "name": "Firebase-messaging",
+      "fileUrl": "https://raw.githubusercontent.com/firebase/firebase-android-sdk/master/LICENSE",
+      "file": "firebase_messaging.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Android Software Development Kit License",
+          "url": "https://developer.android.com/studio/terms.html"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "4.8.0",
+      "dependency": "com.github.bumptech.glide:glide:4.8.0",
+      "name": "Glide",
+      "fileUrl": "https://raw.githubusercontent.com/bumptech/glide/master/LICENSE",
+      "file": "glide.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Simplified BSD License",
+          "url": "http://www.opensource.org/licenses/bsd-license"
+        },
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": null,
+      "dependency": "com.google.code.gson:gson:2.8.5",
+      "name": "Gson",
+      "fileUrl": "https://raw.githubusercontent.com/google/gson/master/LICENSE",
+      "file": "gson.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Apache 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "5.1.1",
+      "dependency": "net.hockeyapp.android:HockeySDK:5.1.1",
+      "name": "Hockeysdk",
+      "fileUrl": "https://raw.githubusercontent.com/bitstadium/HockeySDK-Android/develop/LICENSE",
+      "file": "hockeysdk.txt",
+      "licenses": [
+        {
+          "license": "The MIT License (MIT)",
+          "url": "https://raw.githubusercontent.com/bitstadium/HockeySDK-Android/develop/LICENSE"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "1.1.1",
+      "dependency": "com.auth0.android:jwtdecode:1.1.1",
+      "name": "Jwtdecode",
+      "fileUrl": "https://raw.githubusercontent.com/auth0/jwt-decode/master/LICENSE",
+      "file": "jwtdecode.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The MIT License (MIT)",
+          "url": "https://raw.githubusercontent.com/auth0/jwtdecode.android/master/LICENSE"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "2.5.4",
+      "dependency": "com.launchdarkly:launchdarkly-android-client:2.5.4",
+      "name": "LaunchDarkly SDK for Android",
+      "fileUrl": "https://raw.githubusercontent.com/launchdarkly/android-client/master/LICENSE.txt",
+      "file": "launchdarkly.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "3.1.3",
+      "dependency": "com.android.databinding:library:3.1.3",
+      "name": "Library",
+      "file": "android_support.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": null,
+      "dependency": "com.squareup.okhttp3:logging-interceptor:3.10.0",
+      "name": "OkHttp Logging Interceptor",
+      "fileUrl": "https://raw.githubusercontent.com/square/okhttp/master/LICENSE.txt",
+      "file": "okhttp_logging_interceptor.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Apache 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "3.0.1",
+      "dependency": "com.google.protobuf:protobuf-lite:3.0.1",
+      "name": "Protocol Buffers [Lite]",
+      "fileUrl": "https://raw.githubusercontent.com/protocolbuffers/protobuf/master/LICENSE",
+      "file": "protobuf.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "New BSD license",
+          "url": "http://www.opensource.org/licenses/bsd-license.php"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "2.0.3",
+      "dependency": "com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3",
+      "name": "QRCodeReaderView",
+      "file": "qrcodereaderview.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": "5.4.1",
+      "dependency": "io.realm:realm-android-library:5.4.1",
+      "name": "Realm-android-library",
+      "fileUrl": "https://raw.githubusercontent.com/realm/realm-java/master/LICENSE",
+      "file": "realm_android_library.txt",
+      "licenses": [
+      ]
+    },
+    {
+      "contentHash": "01e633849b250297e4459b4324083709",
+      "originalClassName": "Lib",
+      "version": null,
+      "dependency": "com.squareup.retrofit2:retrofit:2.4.0",
+      "name": "Retrofit",
+      "file": "retrofit.txt",
+      "licenses": [
+        {
+          "contentHash": "a74e931c6e3fb820d9089e24e5dfa25f",
+          "originalClassName": "License",
+          "license": "Apache 2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    }
+  ]
+}
+

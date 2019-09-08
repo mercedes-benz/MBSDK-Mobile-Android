@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mbloginui_font_size_m">18sp</dimen>
+    <dimen name="mbloginui_font_size_registration_fields">16sp</dimen>
+    <dimen name="font_size_service">18sp</dimen>
+    <dimen name="font_size_service_title">22sp</dimen>
+    <dimen name="font_size_car_title">24sp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+
+    <dimen name="item_vehicle_progress_size">25dp</dimen>
+
+    <dimen name="item_service_spinner_size">25dp</dimen>
+    <dimen name="item_service_switch_padding">25dp</dimen>
+    <dimen name="item_service_height">60dp</dimen>
+
+    <dimen name="family_apps_icon_size">50dp</dimen>
+
+    <dimen name="login_me_id_icon_size">20dp</dimen>
+
+    <dimen name="menu_header_image_size">80dp</dimen>
+
+    <dimen name="profile_image_edit_size">40dp</dimen>
+
+    <dimen name="garage_item_height">108dp</dimen>
+
+    <dimen name="garage_vehicle_width">270dp</dimen>
+    <dimen name="garage_vehicle_height">240dp</dimen>
+    <dimen name="garage_vehicle_pending_spinner_size">45dp</dimen>
+
+    <dimen name="settings_element_height">63dp</dimen>
+    <dimen name="identity_check_img_size">134dp</dimen>
+
+    <dimen name="vehicle_pairing_information_image_height">190dp</dimen>
+    <dimen name="dealer_search_empty_icon_size">104dp</dimen>
+</resources>

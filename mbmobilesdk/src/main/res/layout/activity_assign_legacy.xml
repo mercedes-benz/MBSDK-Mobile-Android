@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleassignment.AssignLegacyViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@color/mb_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_header"
+                android:layout_width="0dp"
+                android:layout_height="190dp"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:src="@color/mb_grey3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+                android:id="@+id/tv_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:gravity="center"
+                android:text="@string/assign_no_connect_headline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_header" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:gravity="center"
+                android:text="@string/assign_no_connect_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_header" />
+
+            <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                android:id="@+id/btn_finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginEnd="@dimen/mb_margin_default"
+                android:onClick="@{() -> model.onCloseClicked()}"
+                android:text="@string/service_summary_finish"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

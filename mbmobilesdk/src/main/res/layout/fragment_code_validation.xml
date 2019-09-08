@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.vehicleassignment.AssignmentCodeViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/scroll_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background"
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/mb_margin_default"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBHeadline4SerifTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:gravity="center"
+                android:text="@string/assign_code_vac_title"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textSize="@dimen/mb_font_size_headline_4" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+                android:id="@+id/tv_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:gravity="center"
+                android:text="@string/assign_code_vac_description"
+                android:textColor="@color/mb_text_color_secondary"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_step_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="iv_car_front, tv_step_first" />
+
+            <ImageView
+                android:id="@+id/iv_car_front"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_car_front"
+                app:layout_constraintBottom_toBottomOf="@id/tv_step_first"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toTopOf="@id/tv_step_first" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                android:id="@+id/tv_step_first"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:text="@string/assign_code_vac_step1"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toEndOf="@id/iv_car_front"
+                app:layout_constraintTop_toBottomOf="@id/tv_text" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_step_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="iv_car_hotspot, tv_step_second" />
+
+            <ImageView
+                android:id="@+id/iv_car_hotspot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_vehicle_hotspot"
+                app:layout_constraintBottom_toBottomOf="@id/tv_step_second"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toTopOf="@id/tv_step_second" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                android:id="@+id/tv_step_second"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:text="@string/assign_code_vac_step2"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toEndOf="@id/iv_car_front"
+                app:layout_constraintTop_toBottomOf="@id/barrier_step_first" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_step_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="iv_check, tv_step_third" />
+
+            <ImageView
+                android:id="@+id/iv_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_checkmark"
+                app:layout_constraintBottom_toBottomOf="@id/tv_step_third"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toTopOf="@id/tv_step_third" />
+
+            <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                android:id="@+id/tv_step_third"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:text="@string/assign_code_vac_step3"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toEndOf="@id/iv_car_front"
+                app:layout_constraintTop_toBottomOf="@id/barrier_step_second" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_vin"
+                style="@style/MBTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/mb_margin_default"
+                android:layout_marginTop="@dimen/mb_margin_large"
+                android:layout_marginRight="@dimen/mb_margin_default"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_step_third">
+
+                <com.daimler.mbuikit.widgets.edittexts.MBEditText
+                    style="@style/MBEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:hint="@string/assign_code_vac_placeholder"
+                    android:text="@={model.validationCode}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_small"
+                android:visibility="@{model.progressVisible}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_vin" />
+
+            <com.daimler.mbuikit.widgets.buttons.MBPrimaryButton
+                android:id="@+id/btn_validate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:enabled="@{!safeUnbox(model.progressVisible)}"
+                android:onClick="@{() -> model.onValidateCodeClicked()}"
+                android:text="@string/assign_code_vac_button"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toBottomOf="@+id/progress" />
+
+            <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                android:id="@+id/btn_retry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mb_margin_default"
+                android:layout_marginBottom="@dimen/mb_margin_large"
+                android:enabled="@{!model.progressVisible}"
+                android:onClick="@{() -> model.onGenerateCodeClicked()}"
+                android:text="@string/verification_btn_send_again"
+                app:layout_constraintEnd_toEndOf="@id/g_end"
+                app:layout_constraintStart_toStartOf="@id/g_start"
+                app:layout_constraintTop_toBottomOf="@id/btn_validate" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

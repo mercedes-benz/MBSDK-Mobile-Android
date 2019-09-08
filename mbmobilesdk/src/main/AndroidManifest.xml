@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.daimler.mbmobilesdk">
+
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        tools:node="replace" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="false"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <activity android:name="com.daimler.mbmobilesdk.jumio.identitycheckhint.IdentityCheckHintActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Jumio" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.jumio.identityScanner.IdentityScannerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Jumio" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.jumio.identitycheck.IdentityCheckActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Jumio" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.countryselection.LocaleChooserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.languageselection.LanguageChooserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.AssignVehicleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.QRCodeReaderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.AssignmentCodeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.AssignVehicleQRActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity android:name="com.daimler.mbmobilesdk.vehicleselection.VehicleInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name="com.daimler.mbmobilesdk.serviceactivation.ServiceOverviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.serviceactivation.ServiceDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.pin.UserPinActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.RifActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.AssignLegacyActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicleassignment.SearchMerchantActivity"
+            android:theme="@style/SdkTheme"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.stageselector.StageSelectorActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehiclestage.VehicleStageActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.splash.MBSplashActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.legal.license.LicenseDetailActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.send2car.SendLocationToCarActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/DialogActivitySdkTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.daimler.mbmobilesdk.notificationcenter.presentation.InboxActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.units.UnitsSettingsActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.serviceactivation.precondition.ServicePreconditionActivity"
+            android:theme="@style/SdkTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.tou.HtmlUserAgreementActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.profile.edit.ProfileDynamicEditActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/SdkTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.picker.SearchAndPickActivity"
+            android:theme="@style/SdkTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.tou.AgreementsActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.legal.license.LicensesActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.vehicledeletion.VehicleDeletionActivity"
+            android:theme="@style/SdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.push.dialog.PushDialogActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/DialogActivitySdkTheme" />
+        <activity
+            android:name="com.daimler.mbmobilesdk.profile.locale.UserLocaleChangeActivity"
+            android:theme="@style/SdkTheme" />
+
+        <provider
+            android:name="com.daimler.mbmobilesdk.utils.MBMobileSDKFileProvider"
+            android:authorities="${applicationId}.${imageProviderAuthority}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/mbmobilesdk_file_provider_paths" />
+        </provider>
+
+        <receiver android:name="com.daimler.mbmobilesdk.push.PendingPushReceiver" />
+    </application>
+
+</manifest>

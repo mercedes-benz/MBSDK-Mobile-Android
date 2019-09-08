@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/mb_unit_x12"
+    android:paddingBottom="@dimen/mb_unit_x6"
+    tools:background="@color/mb_default_background"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/mb_margin_default" />
+
+    <View
+        android:id="@+id/profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@id/divider_profile_vehicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/mb_margin_default" />
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/header_image"
+        android:layout_width="@dimen/mb_menu_header_image_size"
+        android:layout_height="@dimen/mb_menu_header_image_size"
+        android:src="@drawable/img_profile_placeholder"
+        app:civ_background_color="@android:color/transparent"
+        app:civ_border_width="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/divider_profile_vehicle"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_name"
+        style="@style/MBTextAppearance.H5.Serif"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_default"
+        app:layout_constraintBottom_toTopOf="@+id/text_id"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toEndOf="@id/header_image"
+        app:layout_constraintTop_toTopOf="@id/header_image"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Username" />
+
+    <TextView
+        android:id="@+id/text_id"
+        style="@style/MBTextAppearance.Subtitle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb_font_sans"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/header_image"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/text_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_name"
+        tools:text="User ID" />
+
+    <View
+        android:id="@+id/divider_profile_vehicle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/mb_divider_height"
+        android:layout_marginStart="@dimen/mb_unit_x6"
+        android:layout_marginTop="@dimen/mb_margin_large"
+        android:layout_marginEnd="@dimen/mb_unit_x6"
+        android:background="@color/mb_divider_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_image" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_no_vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="text_no_vehicle" />
+
+    <TextView
+        android:id="@+id/text_no_vehicle"
+        style="@style/MBTextAppearance.H5.Serif"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_default"
+        app:layout_constraintBottom_toTopOf="@id/text_baumuster"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toEndOf="@id/header_vehicle_image"
+        app:layout_constraintTop_toTopOf="@id/header_vehicle_image"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="A 250 4MATIC" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_model, text_baumuster, image_lock, text_lock_state" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_tank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="image_tank, text_tank," />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_energy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="image_energy, text_energy" />
+
+    <View
+        android:id="@+id/vehicle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider_profile_vehicle" />
+
+    <ImageView
+        android:id="@+id/header_vehicle_image"
+        android:layout_width="@dimen/mb_menu_header_image_size"
+        android:layout_height="@dimen/mb_menu_header_image_size"
+        android:layout_marginTop="@dimen/mb_margin_large"
+        android:src="@drawable/img_vehicle_placeholder"
+        app:layout_constraintStart_toStartOf="@id/g_start"
+        app:layout_constraintTop_toBottomOf="@id/divider_profile_vehicle"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_model"
+        style="@style/MBTextAppearance.H5.Serif"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_default"
+        app:layout_constraintBottom_toTopOf="@id/text_baumuster"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toEndOf="@id/header_vehicle_image"
+        app:layout_constraintTop_toTopOf="@id/header_vehicle_image"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="A 250 4MATIC" />
+
+    <TextView
+        android:id="@+id/text_baumuster"
+        style="@style/MBTextAppearance.Subtitle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb_font_sans"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/image_lock"
+        app:layout_constraintEnd_toEndOf="@id/g_end"
+        app:layout_constraintStart_toStartOf="@id/text_model"
+        app:layout_constraintTop_toBottomOf="@id/text_model"
+        tools:text="ES-BN 1180" />
+
+    <ImageView
+        android:id="@+id/image_lock"
+        android:layout_width="@dimen/mb_menu_header_icon_size"
+        android:layout_height="@dimen/mb_menu_header_icon_size"
+        android:layout_marginTop="@dimen/mb_unit_x1"
+        app:layout_constraintBottom_toBottomOf="@id/header_vehicle_image"
+        app:layout_constraintStart_toStartOf="@id/text_model"
+        app:layout_constraintTop_toBottomOf="@id/text_baumuster"
+        tools:ignore="ContentDescription"
+        android:tint="@color/mb_grey2"
+        tools:src="@drawable/ic_error" />
+
+    <TextView
+        android:id="@+id/text_lock_state"
+        style="@style/MBTextAppearance.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_tiny"
+        android:fontFamily="@font/mb_font_sans"
+        android:textColor="@color/mb_grey2"
+        app:layout_constraintBottom_toBottomOf="@id/image_lock"
+        app:layout_constraintStart_toEndOf="@id/image_lock"
+        app:layout_constraintTop_toTopOf="@id/image_lock"
+        tools:text="LOCKED" />
+
+    <ImageView
+        android:id="@+id/image_tank"
+        android:layout_width="@dimen/mb_menu_header_icon_size"
+        android:layout_height="@dimen/mb_menu_header_icon_size"
+        android:layout_marginStart="@dimen/mb_unit_x3"
+        android:src="@drawable/ic_fuel"
+        app:layout_constraintBottom_toBottomOf="@id/image_lock"
+        app:layout_constraintStart_toEndOf="@id/text_lock_state"
+        app:layout_constraintTop_toTopOf="@id/image_lock"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_tank"
+        style="@style/MBTextAppearance.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_tiny"
+        android:fontFamily="@font/mb_font_sans"
+        android:textColor="@color/mb_grey2"
+        app:layout_constraintBottom_toBottomOf="@id/image_tank"
+        app:layout_constraintStart_toEndOf="@id/image_tank"
+        app:layout_constraintTop_toTopOf="@id/image_tank"
+        tools:text="78 %" />
+
+    <ImageView
+        android:id="@+id/image_energy"
+        android:layout_width="@dimen/mb_menu_header_icon_size"
+        android:layout_height="@dimen/mb_menu_header_icon_size"
+        android:layout_marginStart="@dimen/mb_unit_x3"
+        android:src="@drawable/ic_energy"
+        app:layout_constraintBottom_toBottomOf="@id/image_lock"
+        app:layout_constraintStart_toEndOf="@id/text_tank"
+        app:layout_constraintTop_toTopOf="@id/image_lock"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_energy"
+        style="@style/MBTextAppearance.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mb_margin_tiny"
+        android:fontFamily="@font/mb_font_sans"
+        android:textColor="@color/mb_grey2"
+        app:layout_constraintBottom_toBottomOf="@id/image_energy"
+        app:layout_constraintStart_toEndOf="@id/image_energy"
+        app:layout_constraintTop_toTopOf="@id/image_energy"
+        tools:text="78 %" />
+
+</merge>

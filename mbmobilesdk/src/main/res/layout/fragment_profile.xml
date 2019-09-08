@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.profile.ProfileViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mb_default_background">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/root"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/mb_margin_default"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{safeUnbox(model.headerVisible)}"
+                    app:constraint_referenced_ids="profile_image, iv_edit, tv_name, tv_identifier" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:onClick="@{() -> model.onSelectImage()}"
+                    android:src="@drawable/img_profile_placeholder"
+                    app:bitmap="@{model.imageBitmap}"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/mb_accent_primary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_edit"
+                    android:layout_width="@dimen/profile_image_edit_size"
+                    android:layout_height="@dimen/profile_image_edit_size"
+                    android:background="@drawable/bg_profile_image_edit"
+                    android:onClick="@{() -> model.onSelectImage()}"
+                    android:padding="@dimen/mb_margin_small"
+                    android:src="@drawable/ic_edit"
+                    android:elevation="2dp"
+                    app:colorFilter="@{@color/mb_white}"
+                    app:layout_constraintEnd_toEndOf="@id/profile_image"
+                    app:layout_constraintTop_toTopOf="@id/profile_image" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBHeadline6SerifTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mb_margin_default"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:singleLine="true"
+                    android:text="@{model.name}"
+                    app:layout_constraintBottom_toTopOf="@id/tv_identifier"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/profile_image"
+                    app:layout_constraintTop_toTopOf="@id/profile_image"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="Max Mustermann"
+                    tools:textSize="@dimen/mb_font_size_headline_6" />
+
+                <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+                    android:id="@+id/tv_identifier"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mb_margin_small"
+                    android:layout_marginEnd="@dimen/mb_margin_default"
+                    android:singleLine="true"
+                    android:text="@{model.mercedesMeId}"
+                    android:textColor="@color/mb_grey2"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:text="max.mustermann@email.com" />
+
+                <FrameLayout
+                    android:id="@+id/profile_content_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mb_grey_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_image" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mb_margin_large"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginRight="@dimen/mb_margin_large"
+                    android:enabled="@{!model.progressVisible}"
+                    android:onClick="@{() -> model.onLogoutClicked()}"
+                    android:text="@string/profile_logout_title"
+                    android:visibility="@{safeUnbox(model.logoutVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_content_root" />
+
+                <com.daimler.mbuikit.widgets.buttons.MBSecondaryButton
+                    android:id="@+id/btn_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mb_margin_large"
+                    android:layout_marginTop="@dimen/mb_margin_default"
+                    android:layout_marginRight="@dimen/mb_margin_large"
+                    android:enabled="@{!model.progressVisible}"
+                    android:onClick="@{() -> model.onDeleteAccountClicked()}"
+                    android:text="@string/profile_delete_user"
+                    android:visibility="@{safeUnbox(model.logoutVisible)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.daimler.mbuikit.widgets.loadingindicators.MBLoadingSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(model.progressVisible)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

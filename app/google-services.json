@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "128653340540",
+    "firebase_url": "https://refapp-nightly.firebaseio.com",
+    "project_id": "refapp-nightly",
+    "storage_bucket": "refapp-nightly.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128653340540:android:f2847bd5787d4d36",
+        "android_client_info": {
+          "package_name": "com.daimler.mbmobilesdk.example.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128653340540-1rl211f42a4hrp3d61lo5hukmbcst6qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh8CyzNv4rCYlwW-KsrXpJ2UDR3OEgyEo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
