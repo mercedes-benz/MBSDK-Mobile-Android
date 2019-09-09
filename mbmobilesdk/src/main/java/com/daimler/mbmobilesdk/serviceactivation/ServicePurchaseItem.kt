@@ -12,8 +12,9 @@ internal class ServicePurchaseItem(
     var service: Service,
     @DrawableRes val iconRes: Int,
     serviceHint: String?,
-    selectable: Boolean
-) : BaseServiceItem() {
+    selectable: Boolean,
+    isLast: Boolean
+) : BaseServiceItem(isLast) {
 
     override val type = TYPE_PURCHASE
     override val serviceId: Int get() = service.id

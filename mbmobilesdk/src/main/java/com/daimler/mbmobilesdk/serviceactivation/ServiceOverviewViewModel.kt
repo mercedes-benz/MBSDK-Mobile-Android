@@ -34,7 +34,6 @@ import com.daimler.mbuikit.lifecycle.events.MutableLiveEvent
 import com.daimler.mbuikit.lifecycle.events.MutableLiveUnitEvent
 import com.daimler.mbuikit.utils.extensions.getString
 import com.daimler.mbuikit.utils.extensions.mutableLiveDataOf
-import java.util.*
 
 internal class ServiceOverviewViewModel(
     app: Application,
@@ -49,11 +48,7 @@ internal class ServiceOverviewViewModel(
     val readyButtonVisible = initialView
     val serviceItems = MutableLiveArrayList<BaseServiceItem>()
 
-    val carTitle = mutableLiveDataOf(vehicle.model)
-    val licensePlate = mutableLiveDataOf(vehicle.licensePlate)
-    val carFin = mutableLiveDataOf(vehicle.finOrVin)
     val carImage = MutableLiveData<Bitmap>()
-    val showFallbackImage = mutableLiveDataOf(false)
 
     // TODO error messages
     val serviceSelectedEvent = MutableLiveEvent<ServiceSelectionEvent>()
@@ -149,36 +144,17 @@ internal class ServiceOverviewViewModel(
 
     fun onReadyClicked() = finishEvent.sendEvent()
 
-    fun onLicensePlateEntered() {
-        val licensePlate = licensePlate.value
-        if (licensePlate == vehicle.licensePlate) return
-
-        MBIngressKit.refreshTokenIfRequired()
-            .onComplete { token ->
-                val jwt = token.jwtToken.plainToken
-                MBCarKit.vehicleService().updateLicensePlate(jwt,
-                    Locale.getDefault().country, vehicle.finOrVin, licensePlate.orEmpty())
-                    .onComplete { MBLoggerKit.d("Updated license plate to $licensePlate.") }
-                    .onFailure { MBLoggerKit.re("Failed to update license plate.", it) }
-            }.onFailure {
-                MBLoggerKit.e("Failed to refresh token.", throwable = it)
-                errorEvent.sendEvent(defaultErrorMessage(it))
-            }
-    }
-
     private fun loadCarImage() {
-        VehicleImageLoader(vehicle.finOrVin).loadDefault(Degrees.DEGREES_40)
+        VehicleImageLoader(vehicle.finOrVin).loadDefault(Degrees.DEGREES_320)
             .onComplete { images ->
                 images.firstOrNull()?.let { image ->
                     image.imageBytes?.let {
-                        showFallbackImage.postValue(false)
                         carImage.postValue(BitmapFactory.decodeByteArray(it, 0, it.size))
                     }
                 }
             }
             .onFailure {
                 MBLoggerKit.re("Could not load vehicle image.", it)
-                showFallbackImage.postValue(true)
             }
     }
 
@@ -205,12 +181,14 @@ internal class ServiceOverviewViewModel(
                         this.services.clear()
                         val tmp = mutableListOf<BaseServiceItem>()
                         services.forEach { group ->
+                            tmp.add(ServiceElevatedSeparatorItem())
                             tmp.add(ServiceCategoryItem(group.group))
-                            tmp.addAll(group.services.map {
-                                mapServiceToServiceItem(it)
+                            tmp.addAll(group.services.mapIndexed { index, service ->
+                                mapServiceToServiceItem(service, index == group.services.lastIndex)
                             })
                             this.services.addAll(group.services)
                         }
+                        tmp.add(ServiceElevatedSeparatorItem())
                         serviceItems.addAllAndDispatch(tmp)
                     }.onFailure {
                         MBLoggerKit.re("Could not request services.", it)
@@ -240,7 +218,7 @@ internal class ServiceOverviewViewModel(
                                     val item = items[index]
                                     if (hasItemChangedType(item, service)) {
                                         MBLoggerKit.d("Swapping item type for service ${item.serviceId}")
-                                        val newItem = mapServiceToServiceItem(service)
+                                        val newItem = mapServiceToServiceItem(service, index == group.services.lastIndex)
                                         items.replaceAt(index, newItem)
                                         serviceItems.postValue(items)
                                     } else {
@@ -316,9 +294,6 @@ internal class ServiceOverviewViewModel(
 
     private fun updateVehicleInformation(vehicle: VehicleInfo) {
         this.vehicle = vehicle
-        carTitle.postValue(vehicle.model)
-        licensePlate.postValue(vehicle.licensePlate)
-        carFin.postValue(vehicle.finOrVin)
         loadCarImage()
     }
 
@@ -345,13 +320,13 @@ internal class ServiceOverviewViewModel(
             .forEach { it.toggle() }
     }
 
-    private fun mapServiceToServiceItem(service: Service): BaseServiceItem {
+    private fun mapServiceToServiceItem(service: Service, isLast: Boolean): BaseServiceItem {
         @BaseServiceItem.ServiceItemType val type = serviceItemType(service)
         return when (type) {
             TYPE_PURCHASE -> ServicePurchaseItem(service, 0, null,
-                service.hasDetails())
+                service.hasDetails(), isLast)
             else -> ServiceItem(service, 0, service.isActive(), service.isChangeable(),
-                getServiceHint(service), service.hasDetails())
+                getServiceHint(service), service.hasDetails(), isLast)
         }
     }
 

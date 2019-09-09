@@ -17,8 +17,9 @@ internal class ServiceItem(
     isActive: Boolean,
     changeable: Boolean,
     serviceHint: String?,
-    selectable: Boolean
-) : BaseServiceItem() {
+    selectable: Boolean,
+    isLast: Boolean
+) : BaseServiceItem(isLast) {
 
     override val type = TYPE_DEFAULT
     override val serviceId: Int get() = service.id

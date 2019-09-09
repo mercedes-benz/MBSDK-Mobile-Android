@@ -15,6 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_service_height"
+        android:layout_marginStart="@dimen/mb_margin_default"
+        android:layout_marginEnd="@dimen/mb_margin_default"
         android:clickable="@{model.selectable}"
         android:onClick="@{() -> model.onItemClicked()}">
 
@@ -34,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Fernabfrage Fahrzeugstatus Test Test" />
 
-        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
+        <com.daimler.mbuikit.widgets.textviews.MBCaptionTextView
             android:id="@+id/tv_hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -62,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="Activation is processing..." />
 
-        <com.daimler.mbuikit.widgets.textviews.MBBody1TextView
+        <com.daimler.mbuikit.widgets.textviews.MBBody2TextView
             android:id="@+id/tv_purchase"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -72,7 +74,6 @@
             android:paddingEnd="@dimen/mb_margin_small"
             android:text="@string/activate_services_purchase_button"
             android:textColor="@color/mb_accent_primary"
-            android:textSize="@dimen/font_size_service"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -81,6 +82,7 @@
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="@dimen/mb_divider_height"
+            android:visibility="@{!model.isLast}"
             android:background="@color/mb_divider_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

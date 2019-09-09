@@ -13,15 +13,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mb_margin_large">
+        android:layout_marginStart="@dimen/mb_margin_default"
+        android:layout_marginEnd="@dimen/mb_margin_default"
+        android:layout_marginTop="@dimen/mb_margin_default">
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/MBTextAppearance.H5.Serif"
-            android:layout_width="wrap_content"
+            style="@style/MBTextAppearance.Body2"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="@color/mb_grey2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{model.title}"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Fahrzeug-Setup" />

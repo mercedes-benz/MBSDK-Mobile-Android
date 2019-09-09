@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.daimler.mbmobilesdk.serviceactivation.ServiceElevatedSeparatorItem" />
+    </data>
+
+    <com.daimler.mbmobilesdk.views.ElevatedSectionsMiddleSeparator
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mb_margin_default"/>
+
+</layout>

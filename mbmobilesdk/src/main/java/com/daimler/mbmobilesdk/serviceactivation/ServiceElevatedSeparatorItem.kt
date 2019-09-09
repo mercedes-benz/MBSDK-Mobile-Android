@@ -1,15 +1,15 @@
 package com.daimler.mbmobilesdk.serviceactivation
 
+import com.daimler.mbcarkit.business.model.services.Service
 import com.daimler.mbmobilesdk.BR
 import com.daimler.mbmobilesdk.R
-import com.daimler.mbcarkit.business.model.services.Service
 
-internal class ServiceCategoryItem(val title: String) : BaseServiceItem(false) {
+internal class ServiceElevatedSeparatorItem : BaseServiceItem(false) {
 
     override val type = TYPE_CATEGORY
     override val serviceId: Int = -1
 
-    override fun getLayoutRes(): Int = R.layout.item_service_category
+    override fun getLayoutRes(): Int = R.layout.item_elevated_sections_separator
 
     override fun getModelId(): Int = BR.model
 

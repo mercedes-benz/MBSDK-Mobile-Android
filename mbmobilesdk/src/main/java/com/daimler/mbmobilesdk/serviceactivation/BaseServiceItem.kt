@@ -4,7 +4,7 @@ import androidx.annotation.IntDef
 import com.daimler.mbcarkit.business.model.services.Service
 import com.daimler.mbuikit.components.recyclerview.MBBaseRecyclerItem
 
-internal abstract class BaseServiceItem : MBBaseRecyclerItem() {
+internal abstract class BaseServiceItem(val isLast: Boolean) : MBBaseRecyclerItem() {
 
     @ServiceItemType
     abstract val type: Int
