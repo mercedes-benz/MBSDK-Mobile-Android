@@ -1,0 +1,6 @@
+// Jacoco
+apply plugin: 'com.hiya.jacoco-android'
+
+jacoco {
+    toolVersion = "0.8.6"
+}

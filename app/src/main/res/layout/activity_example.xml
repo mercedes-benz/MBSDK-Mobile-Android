@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.daimler.mbmobilesdk.example.ExampleViewModel" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/activity_feature_login_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:text="@string/login_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/activity_feature_login_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:onClick="@{() -> !viewModel.isUserLoggedIn ? viewModel.onLoginClicked() : viewModel.onLogoutClicked()}"
+                android:text="@{viewModel.isUserLoggedIn ? @string/logout : @string/login}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_login_text_view"
+                tools:text="Login" />
+
+            <TextView
+                android:id="@+id/activity_feature_login_status_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:background="@color/background_grey"
+                android:gravity="center"
+                android:paddingTop="@dimen/unit_x1"
+                android:paddingBottom="@dimen/unit_x1"
+                android:text="@{viewModel.isUserLoggedIn ? @string/logged_in : @string/not_logged_in}"
+                android:textColor="@{viewModel.isUserLoggedIn ? @color/status_success : @color/status_error}"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_feature_login_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_login_text_view"
+                app:layout_constraintTop_toTopOf="@+id/activity_feature_login_text_view" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.isUserLoggedIn() ? View.VISIBLE : View.GONE}"
+                app:constraint_referenced_ids="first_divider,
+                activity_feature_select_vehicle_button,
+                activity_feature_selected_vehicle_text_view,
+                activity_feature_vehicle_image_view,
+                activity_feature_connect_button,
+                activity_feature_connected_status_text_view" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.isUserLoggedIn() ? View.VISIBLE : View.GONE}"
+                app:constraint_referenced_ids="second_divider,
+                activity_feature_vehicle_commands_text_view,
+                activity_feature_doors_text_view,
+                activity_feature_unlock_doors_button,
+                activity_feature_door_lock_status_text_view,
+                activity_feature_windows_text_view,
+                activity_feature_open_windows_button,
+                activity_feature_window_status_text_view" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.isUserLoggedIn() ? View.VISIBLE : View.GONE}"
+                app:constraint_referenced_ids="third_divider,
+                tank_title,gas_range_title,
+                gas_range_text_view,liquid_range_title,
+                liquid_range_text_view,
+                electric_range_title,
+                electric_range_text_view" />
+
+            <View
+                android:id="@+id/first_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:layout_marginEnd="@dimen/unit_x3"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_login_button" />
+
+            <Button
+                android:id="@+id/activity_feature_select_vehicle_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:enabled="@{viewModel.isUserLoggedIn}"
+                android:onClick="@{() -> viewModel.onSelectVehicleClicked()}"
+                android:text="@string/select_vehicle_text"
+                app:layout_constraintBottom_toTopOf="@+id/activity_feature_connect_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_vehicle_image_view"
+                app:layout_constraintTop_toTopOf="@+id/activity_feature_vehicle_image_view" />
+
+
+            <TextView
+                android:id="@+id/activity_feature_selected_vehicle_fin_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:text="@string/selected_vehicle_fin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_divider" />
+
+            <TextView
+                android:id="@+id/activity_feature_fin_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:background="@color/background_grey"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="@dimen/unit_x1"
+                android:paddingEnd="10dp"
+                android:paddingBottom="@dimen/unit_x1"
+                android:text="@{viewModel.fin}"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_feature_selected_vehicle_fin_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_selected_vehicle_fin_text_view"
+                app:layout_constraintTop_toTopOf="@+id/activity_feature_selected_vehicle_fin_text_view" />
+
+            <TextView
+                android:id="@+id/activity_feature_selected_vehicle_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:text="@string/selected_vehicle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_selected_vehicle_fin_text_view" />
+
+            <TextView
+                android:id="@+id/activity_feature_connected_status_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:background="@color/background_grey"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="@dimen/unit_x1"
+                android:paddingEnd="10dp"
+                android:paddingBottom="@dimen/unit_x1"
+                android:text="@{viewModel.isVehicleConnected ? @string/connected : @string/not_connected}"
+                android:textColor="@{viewModel.isVehicleConnected ? @color/status_success : @color/status_error}"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_feature_selected_vehicle_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_selected_vehicle_text_view"
+                app:layout_constraintTop_toTopOf="@+id/activity_feature_selected_vehicle_text_view" />
+
+
+            <ImageView
+                android:id="@+id/activity_feature_vehicle_image_view"
+                android:layout_width="@dimen/image_size"
+                android:layout_height="@dimen/image_size"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:background="@color/background_grey"
+                android:scaleType="centerCrop"
+                app:imageBitmap="@{viewModel.vehicleImage}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_selected_vehicle_text_view"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/activity_feature_connect_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:enabled="@{viewModel.isUserLoggedIn}"
+                android:onClick="@{() -> viewModel.isVehicleConnected ? viewModel.onCarDisconnectClicked() : viewModel.onCarConnectClicked()}"
+                android:text="@{viewModel.isVehicleConnected ? @string/disconnect : @string/connect}"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_feature_vehicle_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_vehicle_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_select_vehicle_button"
+                tools:text="Connect" />
+
+
+            <View
+                android:id="@+id/second_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:layout_marginEnd="@dimen/unit_x3"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_vehicle_image_view" />
+
+
+            <TextView
+                android:id="@+id/activity_feature_vehicle_commands_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:text="@string/vehicle_commands_entry"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/second_divider" />
+
+            <TextView
+                android:id="@+id/activity_feature_doors_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:text="@string/doors_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_vehicle_commands_text_view" />
+
+            <Button
+                android:id="@+id/activity_feature_unlock_doors_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:enabled="@{viewModel.isVehicleConnected}"
+                android:onClick="@{() -> viewModel.isDoorsLocked ? viewModel.onUnlockDoorsClicked() : viewModel.onLockDoorsClicked()}"
+                android:text="@{viewModel.isDoorsLocked ? @string/unlock_doors : @string/lock_doors}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_doors_text_view"
+                tools:text="Lock Doors" />
+
+            <TextView
+                android:id="@+id/activity_feature_door_lock_status_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:background="@color/background_grey"
+                android:gravity="center"
+                android:paddingTop="@dimen/unit_x1"
+                android:paddingBottom="@dimen/unit_x1"
+                android:text="@{viewModel.doorStateText}"
+                android:textColor="@{viewModel.isDoorStateValid ? @color/status_success : @color/status_error}"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_feature_doors_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_doors_text_view"
+                app:layout_constraintTop_toTopOf="@+id/activity_feature_doors_text_view" />
+
+            <TextView
+                android:id="@+id/activity_feature_windows_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:text="@string/windows_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_unlock_doors_button" />
+
+            <Button
+                android:id="@+id/activity_feature_open_windows_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:enabled="@{viewModel.isVehicleConnected}"
+                android:onClick="@{() -> viewModel.isWindowsLocked ? viewModel.onOpenWindowsClicked() : viewModel.onCloseWindowsClicked()}"
+                android:text="@{viewModel.isWindowsLocked ? @string/open_windows : @string/close_windows}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_windows_text_view"
+                tools:text="Close Windows" />
+
+            <TextView
+                android:id="@+id/activity_feature_window_status_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:background="@color/background_grey"
+                android:gravity="center"
+                android:paddingTop="@dimen/unit_x1"
+                android:paddingBottom="@dimen/unit_x1"
+                android:text="@{viewModel.windowStateText}"
+                android:textColor="@{viewModel.isWindowStateValid ?  @color/status_success : @color/status_error}"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_feature_windows_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_feature_windows_text_view"
+                app:layout_constraintTop_toTopOf="@+id/activity_feature_windows_text_view" />
+
+            <View
+                android:id="@+id/third_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:layout_marginEnd="@dimen/unit_x3"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_feature_open_windows_button" />
+
+            <TextView
+                android:id="@+id/tank_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:text="@string/tank_rank_in_km"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/third_divider" />
+
+            <TextView
+                android:id="@+id/gas_range_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x2"
+                android:text="@string/gas_range"
+                app:layout_constraintBottom_toTopOf="@+id/gas_range_text_view"
+                app:layout_constraintEnd_toStartOf="@+id/liquid_range_title"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tank_title" />
+
+            <TextView
+                android:id="@+id/gas_range_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x2"
+                android:background="@color/background_grey"
+                android:padding="@dimen/unit_x1"
+                android:text="@{TextUtils.isEmpty(viewModel.gasRangeText) ? @string/default_text : viewModel.gasRangeText}"
+                app:layout_constraintEnd_toStartOf="@+id/liquid_range_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gas_range_title" />
+
+            <TextView
+                android:id="@+id/liquid_range_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x2"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x2"
+                android:text="@string/liquid_range"
+                app:layout_constraintBottom_toTopOf="@+id/liquid_range_text_view"
+                app:layout_constraintEnd_toStartOf="@+id/electric_range_title"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/gas_range_title"
+                app:layout_constraintTop_toBottomOf="@+id/tank_title" />
+
+            <TextView
+                android:id="@+id/liquid_range_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x2"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x2"
+                android:background="@color/background_grey"
+                android:padding="@dimen/unit_x1"
+                android:text="@{TextUtils.isEmpty(viewModel.liquidRangeText) ? @string/default_text : viewModel.liquidRangeText}"
+                app:layout_constraintEnd_toStartOf="@+id/electric_range_text_view"
+                app:layout_constraintStart_toEndOf="@+id/gas_range_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/liquid_range_title" />
+
+            <TextView
+                android:id="@+id/electric_range_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x2"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:text="@string/electric_range"
+                app:layout_constraintBottom_toTopOf="@+id/electric_range_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/liquid_range_title"
+                app:layout_constraintTop_toBottomOf="@+id/tank_title" />
+
+            <TextView
+                android:id="@+id/electric_range_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x2"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:background="@color/background_grey"
+                android:padding="@dimen/unit_x1"
+                android:text="@{TextUtils.isEmpty(viewModel.electricRangeText) ? @string/default_text : viewModel.electricRangeText}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/liquid_range_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/electric_range_title" />
+
+            <View
+                android:id="@+id/fourth_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/unit_x3"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gas_range_text_view" />
+
+            <TextView
+                android:id="@+id/send_to_car_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:text="@string/send_to_car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fourth_divider" />
+
+            <Button
+                android:id="@+id/activity_send_poi_to_car_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x3"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:onClick="@{() -> viewModel.onSendPoiToCarClicked()}"
+                android:enabled="@{viewModel.isVehicleConnected &amp;&amp; !viewModel.isSendToCarInProgress}"
+                android:text="@string/send_poi_to_car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/send_to_car_title"
+                tools:text="Send POI to car" />
+
+            <View
+                android:id="@+id/fifth_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/unit_x3"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/unit_x3"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_send_poi_to_car_button" />
+
+            <TextView
+                android:id="@+id/all_attributes_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x4"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:text="@string/vehicle_status_dump"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fifth_divider" />
+
+            <TextView
+                android:id="@+id/all_vehicle_attributes_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_x4"
+                android:layout_marginTop="@dimen/unit_x2"
+                android:layout_marginEnd="@dimen/unit_x4"
+                android:layout_marginBottom="8dp"
+                android:background="@color/background_grey"
+                android:padding="@dimen/unit_x1"
+                android:text="@{viewModel.vehicleStatusText}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/all_attributes_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

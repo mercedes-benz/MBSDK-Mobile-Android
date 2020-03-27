@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_size">124dp</dimen>
+    <dimen name="title_text_size">20sp</dimen>
+    <dimen name="divider_height">0.5dp</dimen>
+    <dimen name="unit_x1">4dp</dimen>
+    <dimen name="unit_x2">8dp</dimen>
+    <dimen name="unit_x3">12dp</dimen>
+    <dimen name="unit_x4">16dp</dimen>
+    <dimen name="unit_x5">20dp</dimen>
+    <dimen name="unit_x6">24dp</dimen>
+    <dimen name="mb_mobile_sdk_margin_default">16dp</dimen>
+    <dimen name="mb_mobile_sdk_margin_small">8dp</dimen>
+    <dimen name="mb_mobile_sdk_text_size_title">16sp</dimen>
+    <dimen name="mb_mobile_sdk_dialog_min_width">280dp</dimen>
+</resources>

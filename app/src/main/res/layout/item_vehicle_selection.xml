@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.daimler.mbmobilesdk.example.vehicleSelection.VehicleInfoItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vehicle_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> item.onClicked()}">
+
+        <ImageView
+            android:id="@+id/vehicle_image"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/background_grey"
+            android:scaleType="centerCrop"
+            app:imageBitmap="@{item.vehicleImage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_model_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/unit_x4"
+            android:layout_marginBottom="@dimen/unit_x1"
+            android:text="@string/model_entry"
+            app:layout_constraintBottom_toTopOf="@+id/vehicle_selection_item_vin_title_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/vehicle_selection_item_model_content_text_view"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_model_content_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x3"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:text="@{item.model}"
+            app:layout_constraintBottom_toBottomOf="@+id/vehicle_selection_item_model_title_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_selection_item_model_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/vehicle_selection_item_model_title_text_view" />
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_vin_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/unit_x1"
+            android:layout_marginBottom="@dimen/unit_x1"
+            android:text="@string/vin_entry"
+            app:layout_constraintBottom_toTopOf="@+id/vehicle_selection_item_fuel_type_title_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/vehicle_selection_item_vin_content_text_view"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_image"
+            app:layout_constraintTop_toBottomOf="@+id/vehicle_selection_item_model_title_text_view" />
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_vin_content_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x3"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:text="@{item.vin}"
+            app:layout_constraintBottom_toBottomOf="@+id/vehicle_selection_item_vin_title_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_selection_item_vin_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/vehicle_selection_item_vin_title_text_view" />
+
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_fuel_type_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/unit_x1"
+            android:layout_marginBottom="@dimen/unit_x1"
+            android:text="@string/fuel_entry"
+            app:layout_constraintBottom_toTopOf="@+id/vehicle_selection_item_roof_type_title_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/vehicle_selection_item_fuel_type_content_text_view"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_image"
+            app:layout_constraintTop_toBottomOf="@+id/vehicle_selection_item_vin_title_text_view" />
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_fuel_type_content_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x3"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:text="@{item.fuelType}"
+            app:layout_constraintBottom_toBottomOf="@+id/vehicle_selection_item_fuel_type_title_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_selection_item_fuel_type_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/vehicle_selection_item_fuel_type_title_text_view" />
+
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_roof_type_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/unit_x1"
+            android:layout_marginBottom="@dimen/unit_x4"
+            android:text="@string/roof_type"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vehicle_selection_item_roof_type_content_text_view"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_image"
+            app:layout_constraintTop_toBottomOf="@+id/vehicle_selection_item_fuel_type_title_text_view" />
+
+        <TextView
+            android:id="@+id/vehicle_selection_item_roof_type_content_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x3"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:text="@{item.roofType}"
+            app:layout_constraintBottom_toBottomOf="@+id/vehicle_selection_item_roof_type_title_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_selection_item_roof_type_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/vehicle_selection_item_roof_type_title_text_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

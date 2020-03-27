@@ -1,0 +1,16 @@
+package com.daimler.mbcarkit.business.model.services
+
+enum class ServiceMissingField {
+    LICENSE_PLATE,
+    VEHICLE_SERVICE_DEALER,
+    USER_CONTACT_BY_MAIL,
+    USER_CONTACT_BY_PHONE,
+    USER_CONTACT_BY_SMS,
+    USER_CONTACT_BY_LETTER,
+    CP_INCREDIT,
+    USER_MOBILE_PHONE,
+    USER_MOBILE_PHONE_VERIFIED,
+    USER_MAIL,
+    USER_MAIL_VERIFIED,
+    UNKNOWN
+}

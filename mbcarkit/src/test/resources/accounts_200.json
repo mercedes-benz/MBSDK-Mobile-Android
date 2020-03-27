@@ -1,0 +1,46 @@
+{
+  "accountTypes": [
+    {
+      "accountType": "MUSIC",
+      "iconUrl": "string",
+      "name": "string",
+      "bannerImageUrl": "string",
+      "heading": "string",
+      "description": "string",
+      "visible": true,
+      "accounts": [
+        {
+          "connectionState": "DISCONNECTED",
+          "userAccountId": "string",
+          "vendorId": "string",
+          "description": "string",
+          "descriptionLinks": {
+            "string": "string"
+          },
+          "isDefault": true,
+          "iconUrl": "string",
+          "bannerUrl": "string",
+          "vendorDisplayName": "string",
+          "accountType": "MUSIC",
+          "possibleActions": [
+            {
+              "label": "string",
+              "action": "CONNECT",
+              "url": "string"
+            }
+          ],
+          "legalTextUrl": "string"
+        }
+      ]
+    },
+    {
+      "accountType": "IN_CAR_OFFICE"
+    },
+    {
+      "accountType": "CHARGING"
+    },
+    {
+      "accountType": "SMART_HOME"
+    }
+  ]
+}

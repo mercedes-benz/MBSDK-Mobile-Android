@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: '../jacoco.gradle'
+
+android {
+    buildTypes {
+        release {
+            consumerProguardFiles '../proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    debugApi project(":mbloggerkit")
+    releaseApi "com.daimler.mm:MBLoggerKit:$moduleVersion"
+
+    api Deps.kotlin
+}
+
+ext {
+    artifactId = 'MBCommonKit'
+}

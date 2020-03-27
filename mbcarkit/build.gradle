@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
+apply from: '../jacoco.gradle'
+
+android {
+    buildTypes {
+        debug {
+        }
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    debugApi project(":mbcommonkit")
+    debugApi project(":mbnetworkkit")
+    debugApi project(":mbrealmkit")
+    debugImplementation project(':mbprotokit')
+    releaseApi "com.daimler.mm:MBCommonKit:$moduleVersion"
+    releaseApi "com.daimler.mm:MBNetworkKit:$moduleVersion"
+    releaseApi "com.daimler.mm:MBRealmKit:$moduleVersion"
+    releaseImplementation "com.daimler.mm:MBProtoKit:$moduleVersion"
+
+    implementation Deps.kotlin
+    implementation Deps.google_protobuf
+}
+
+ext {
+    artifactId = 'MBCarKit'
+}

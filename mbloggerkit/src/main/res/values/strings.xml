@@ -1,0 +1,7 @@
+<resources>
+    <string name="share_as_text">Share as text</string>
+    <string name="share_as_file">Share as file</string>
+    <string name="show_log">Show log</string>
+    <string name="text_size_hint">Your log size is larger than 1 MB. Share as text might be not working! Use share file
+    instead.</string>
+</resources>

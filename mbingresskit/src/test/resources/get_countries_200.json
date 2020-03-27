@@ -1,0 +1,18 @@
+[
+  {
+    "countryCode": "string",
+    "countryName": "string",
+    "instance": "string",
+    "legalRegion": "string",
+    "defaultLocale": "string",
+    "locales": [
+      {
+        "localeCode": "string",
+        "localeName": "string"
+      }
+    ],
+    "connectCountry": true,
+    "natconCountry": true,
+    "availability": true
+  }
+]

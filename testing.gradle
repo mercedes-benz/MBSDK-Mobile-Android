@@ -1,0 +1,24 @@
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+dependencies {
+    testImplementation project(":testutils")
+    testImplementation Deps.junit
+    testImplementation Deps.mockk
+    testImplementation Deps.assertj
+    testImplementation Deps.mockserver
+    testImplementation Deps.jupiter_params
+    testImplementation Deps.jupiter_api
+    testImplementation Deps.kotlin_coroutines_test
+
+    androidTestImplementation Deps.androidx_test_junit
+    androidTestImplementation Deps.androidx_test_espresso
+
+    // this allows us to still run junit4 tests without changing any test code
+    testRuntimeOnly Deps.vintage_engine
+    testRuntimeOnly Deps.jupiter_engine
+}

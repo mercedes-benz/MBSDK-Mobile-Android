@@ -1,0 +1,40 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'org.jetbrains.dokka-android'
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = moduleGroupId
+            artifactId = project.artifactId
+            version = moduleVersion
+            // You need to invoke the gradle task assembleRelease for this module to be able
+            // to deploy an artifact.
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+
+            pom.withXml {
+                def dependencies = asNode().appendNode('dependencies')
+
+                configurations.releaseImplementation.allDependencies
+                        .plus(configurations.implementation.allDependencies)
+                        .each {
+                            if (isValidDependency(it)) {
+                                def dependency = dependencies.appendNode('dependency')
+                                dependency.appendNode('groupId', it.group)
+                                dependency.appendNode('artifactId', it.name)
+                                dependency.appendNode('version', it.version)
+                            }
+                        }
+            }
+        }
+    }
+}
+
+/**
+ * Returns true if the given dependency has a group, name and version given and if
+ * the dependency is not a ProjectDependency.
+ */
+private static boolean isValidDependency(Dependency dependency) {
+    return dependency.group != null && dependency.name != null &&
+            dependency.version != 'unspecified' && !(dependency instanceof ProjectDependency)
+}

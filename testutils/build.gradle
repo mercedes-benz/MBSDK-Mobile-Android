@@ -1,0 +1,17 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../jacoco.gradle'
+
+dependencies {
+    implementation Deps.kotlin
+    implementation Deps.androidx_annotations
+    implementation Deps.kotlin_coroutines
+    implementation Deps.kotlin_coroutines_android
+
+    implementation Deps.mockk
+    implementation Deps.jupiter_params
+    implementation Deps.jupiter_api
+    implementation Deps.kotlin_coroutines_test
+}

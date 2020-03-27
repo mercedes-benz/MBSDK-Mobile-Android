@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: '../jacoco.gradle'
+
+android {
+    buildTypes {
+        release {
+            consumerProguardFiles '../proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    debugApi project(":mbloggerkit")
+    releaseApi "com.daimler.mm:MBLoggerKit:$moduleVersion"
+
+    api Deps.kotlin
+    api Deps.gson
+    api Deps.retrofit
+    api Deps.gson_converter
+    api Deps.scalars_converter
+    api Deps.logging_interceptor
+    api Deps.kotlin_coroutines
+    api Deps.kotlin_coroutines_android
+    implementation Deps.kotlin_reflect
+}
+
+ext {
+    artifactId = 'MBNetworkKit'
+}

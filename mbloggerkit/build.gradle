@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: '../jacoco.gradle'
+
+android {
+    buildTypes {
+        release {
+            consumerProguardFiles '../proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api Deps.kotlin
+    implementation Deps.androidx_appcompat
+    implementation Deps.android_material
+    api Deps.appcenter
+}
+
+ext {
+    artifactId = 'MBLoggerKit'
+}

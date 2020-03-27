@@ -1,0 +1,61 @@
+{
+  "adaptionValues": {
+    "bodyHeight": 0,
+    "preAdjustment": true
+  },
+  "ciamId": "string",
+  "firstName": "string",
+  "lastName1": "string",
+  "lastName2": "string",
+  "title": "string",
+  "namePrefix": "string",
+  "middleInitial": "string",
+  "salutationCode": "string",
+  "email": "string",
+  "landlinePhone": "string",
+  "mobilePhoneNumber": "string",
+  "birthday": "string",
+  "userPinStatus": "SET",
+  "accountIdentifier": "EMAIL",
+  "preferredLanguageCode": "string",
+  "accountCountryCode": "string",
+  "createdAt": "string",
+  "createdBy": "string",
+  "updatedAt": "string",
+  "unitPreferences": {
+    "clockHours": "24h",
+    "speedDistance": "km/h, km",
+    "consumptionCo": "l/100km",
+    "consumptionEv": "kWh/100km",
+    "consumptionGas": "kg/100km",
+    "tirePressure": "kPa",
+    "temperature": "Celsius"
+  },
+  "address": {
+    "countryCode": "string",
+    "state": "string",
+    "province": "string",
+    "street": "string",
+    "houseNo": "string",
+    "zipCode": "string",
+    "city": "string",
+    "streetType": "string",
+    "houseName": "string",
+    "floorNo": "string",
+    "doorNo": "string",
+    "addressLine1": "string",
+    "addressLine2": "string",
+    "addressLine3": "string",
+    "postOfficeBox": "string"
+  },
+  "communicationPreference": {
+    "contactedByPhone": true,
+    "contactedByLetter": true,
+    "contactedByEmail": true,
+    "contactedBySms": true
+  },
+  "taxNumber": "string",
+  "accountVerified": true,
+  "isEmailVerified": true,
+  "isMobileVerified": true
+}

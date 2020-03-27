@@ -1,0 +1,10 @@
+{
+  "email": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "username": "string",
+  "id": "string",
+  "mobileNumber": "string",
+  "useEmailAsUsername": true,
+  "countryCode": "string"
+}

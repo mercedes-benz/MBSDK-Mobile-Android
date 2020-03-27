@@ -1,0 +1,43 @@
+{
+  "customerDataFields": [
+    {
+      "fieldId": "string",
+      "sequenceOrder": 0,
+      "fieldUsage": "INVISIBLE",
+      "fieldValidation": {
+        "minLength": 0,
+        "maxLength": 0,
+        "regularExpression": "string"
+      },
+      "selectableValues": {
+        "matchSelectableValueByKey": true,
+        "defaultSelectableValueKey": "string",
+        "selectableValues": [
+          {
+            "key": "string",
+            "description": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "fieldDependencies": [
+    {
+      "fieldOwnerType": "ACCOUNT",
+      "itemId": "string",
+      "profileDataFieldRelationshipType": "GROUP",
+      "childrenIds": [
+        "string"
+      ]
+    }
+  ],
+  "groupDependencies": [
+    {
+      "itemId": "string",
+      "profileDataFieldRelationshipType": "GROUP",
+      "childrenIds": [
+        "string"
+      ]
+    }
+  ]
+}

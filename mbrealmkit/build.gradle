@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
+apply from: '../jacoco.gradle'
+
+android {
+    buildTypes {
+        release {
+            consumerProguardFiles '../proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    debugApi project(":mbcommonkit")
+    debugApi project(":mbloggerkit")
+    releaseApi "com.daimler.mm:MBCommonKit:$moduleVersion"
+    releaseApi "com.daimler.mm:MBLoggerKit:$moduleVersion"
+
+    api Deps.kotlin
+}
+
+ext {
+    artifactId = 'MBRealmKit'
+}

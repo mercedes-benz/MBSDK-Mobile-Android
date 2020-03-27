@@ -1,0 +1,14 @@
+package com.daimler.mbcarkit.business.model.vehicle
+
+enum class DriveStatus {
+    CHECKED_OUT,
+    READY,
+    IN_PROGRESS,
+    FAILED_RETRY_POSSIBLE_USER,
+    FAILED_RETRY_POSSIBLE_OPERATOR,
+    FAILED,
+    READY_FOR_PRODUCT_LIABILITY,
+    DRIVE_IN_PROGRESS,
+    OPERATOR_DRIVE_IN_PROGRESS,
+    COMPLETED
+}

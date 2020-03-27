@@ -1,0 +1,5 @@
+ext {
+    moduleGroupId = 'com.daimler.mm'
+    moduleVersion = '3.0.0'
+    azureUrl = 'https://pkgs.dev.azure.com/daimler-ris/sdk/_packaging/release/maven/v1'
+}

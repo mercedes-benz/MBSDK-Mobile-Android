@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.daimler.mbmobilesdk.example.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edit_credentials"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x4"
+            android:layout_marginTop="@dimen/unit_x4"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:hint="@string/phone_or_mail"
+            android:text="@={viewModel.credentials}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_send_tan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x4"
+            android:layout_marginTop="@dimen/unit_x4"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:enabled="@{safeUnbox(viewModel.tanInputEnabled)}"
+            android:onClick="@{() -> viewModel.onSendTanClicked()}"
+            android:text="@string/send_tan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_credentials" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grp_tan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(viewModel.loginVisible)}"
+            app:constraint_referenced_ids="divider, tv_tan_hint, edit_tan, btn_login" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/unit_x4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_send_tan" />
+
+        <TextView
+            android:id="@+id/tv_tan_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x4"
+            android:layout_marginTop="@dimen/unit_x4"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:text="@{@string/enter_tan(viewModel.credentials)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:text="@string/enter_tan" />
+
+        <EditText
+            android:id="@+id/edit_tan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x4"
+            android:layout_marginTop="@dimen/unit_x4"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:hint="@string/tan"
+            android:text="@={viewModel.tan}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_tan_hint" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_x4"
+            android:layout_marginTop="@dimen/unit_x4"
+            android:layout_marginEnd="@dimen/unit_x4"
+            android:enabled="@{safeUnbox(viewModel.loginEnabled)}"
+            android:onClick="@{() -> viewModel.onLoginClicked()}"
+            android:text="@string/confirm_tan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_tan" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(viewModel.progressVisible)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

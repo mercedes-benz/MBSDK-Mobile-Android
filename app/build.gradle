@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../testing.gradle'
+
+android {
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+        applicationId "com.daimler.mbmobilesdk.example"
+        multiDexEnabled true
+
+        buildConfigField 'String', 'KEYCLOAK_CLIENT_ID', "\"YOUR_KEYCLOAK_CLIENT_ID\""
+        buildConfigField 'String', 'CIAM_CLIENT_ID', "\"YOUR_CIAM_CLIENT_ID\""
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+        }
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation project(":mbmobilesdk")
+
+    kapt Deps.androidx_databinding
+    implementation Deps.kotlin
+    implementation Deps.androidx_constraintlayout
+    implementation Deps.androidx_lifecycle_viewmodel
+    implementation Deps.androidx_lifecycle_livedata
+    implementation Deps.androidx_appcompat
+    implementation Deps.androidx_core
+    implementation Deps.androidx_recyclerview
+    implementation Deps.androidx_mulitdex
+
+    implementation Deps.guava
+}

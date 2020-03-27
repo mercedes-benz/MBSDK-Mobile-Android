@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../jacoco.gradle'
+
+android {
+    defaultConfig {
+        buildConfigField 'String', 'MOBILE_SDK_VERSION', "\"$moduleVersion\""
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    debugApi project(":mbcarkit")
+    debugApi project(":mbingresskit")
+    debugImplementation project(':mbprotokit')
+    releaseApi "com.daimler.mm:MBCarKit:$moduleVersion"
+    releaseApi "com.daimler.mm:MBIngressKit:$moduleVersion"
+    releaseImplementation "com.daimler.mm:MBProtoKit:$moduleVersion"
+
+    implementation Deps.kotlin
+    implementation Deps.google_protobuf
+}
+
+ext {
+    artifactId = 'MBMobileSDK'
+}

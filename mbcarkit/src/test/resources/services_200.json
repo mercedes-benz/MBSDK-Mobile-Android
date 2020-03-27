@@ -1,0 +1,44 @@
+[
+  {
+    "group": "string",
+    "services": [
+      {
+        "activationStatus": "ACTIVE",
+        "actualActivationServiceStatus": "ACTIVE",
+        "allowedActions": [],
+        "categoryName": "string",
+        "description": "string",
+        "id": 1,
+        "name": "string",
+        "prerequisiteChecks": [
+          {
+            "actions": [],
+            "missingFields": null,
+            "name": "license"
+          }
+        ],
+        "rights": [
+          "READ",
+          "EXECUTE"
+        ],
+        "shortDescription": "string",
+        "shortName": "string"
+      },
+      {
+        "activationStatus": "INACTIVE",
+        "allowedActions": [
+          "ACCOUNT_LINKAGE"
+        ],
+        "desiredServiceStatus": "ACTIVE",
+        "id": 1,
+        "virtualActivationServiceStatus": "ACTIVE",
+        "missingData": {
+          "missingAccountLinkage": {
+            "mandatory": true,
+            "accountType": "CHARGING"
+          }
+        }
+      }
+    ]
+  }
+]

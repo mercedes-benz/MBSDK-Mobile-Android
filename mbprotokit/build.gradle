@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: '../jacoco.gradle'
+
+android {
+    buildTypes {
+        release {
+            consumerProguardFiles '../proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    debugApi project(":mbnetworkkit")
+    releaseApi "com.daimler.mm:MBNetworkKit:$moduleVersion"
+
+    implementation Deps.kotlin
+    implementation Deps.google_protobuf
+}
+
+ext {
+    artifactId = 'MBProtoKit'
+}
