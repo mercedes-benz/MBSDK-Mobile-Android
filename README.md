@@ -7,6 +7,10 @@
 ![Platform](https://img.shields.io/badge/Platforms-Android-blue)
 ![Version](https://img.shields.io/badge/Azure%20Artifacts-3.0.0-orange)
 
+## This repository is archived.
+
+Mercedes-Benz Mobile SDK is archived and no longer officially supported. You can find more information about this decision in the [news article](https://developer.mercedes-benz.com/news/mercedes-benz-mobile-sdk-sundown) on Mercedes-Benz developer portal.
+
 ## Requirements
 * __Minimum Android SDK:__ MBMobileSDK requires a minimum API level of 23.
 * __Compile Android SDK:__ MBMobileSDK requires you to compile against minimum API level 30.
